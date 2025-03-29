@@ -22,6 +22,7 @@ div {
   height: 100vh; /* Full screen height */
   overflow: hidden; /* Hide overflow */
   background-image: url('worldmap.png');
+  opacity: 0.5;
   background-repeat: repeat-x; /* Horizontal scrolling */
   animation: scrollBackground 20s linear infinite;
 }
