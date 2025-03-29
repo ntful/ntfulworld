@@ -53,17 +53,17 @@
 
 /* Scrolling background effect */
 body {
-  background: url('worldmap.png') repeat-x;
-  background-size: cover;
+  background: url('worldmap.png') repeat-y center center/cover;
   animation: scrollBackground 20s linear infinite;
 }
 
+/* Vertical Scrolling Animation */
 @keyframes scrollBackground {
   from {
-    background-position: 0 0;
+    background-position: center 0;
   }
   to {
-    background-position: -100% 0;
+    background-position: center 100%;
   }
 }
 
