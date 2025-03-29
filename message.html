@@ -36,27 +36,29 @@
      /*       overflow-y: auto; /* Makes the message container scrollable */
     /*        max-height: calc(100% - 60px); /* Ensures the message container takes up all available space except for the bottom buttons */
     /*    } */
-
-        .message-container {
-            margin: 0; /* Remove default margin */
-            overflow-y: auto; /* Makes the message container scrollable */
-            display: flex;
-            flex-direction: column; /* Stack messages vertically */
-            justify-content: flex-start;
-            flex-grow: 0;
-        } 
         
-        /* Each individual message entry style */
+        .message-container {
+            padding: 0 20px; /* No top padding */
+            margin: 0; /* Remove any default margin */
+            overflow-y: auto; /* Scrollable if messages exceed the height */
+            display: flex;
+            flex-direction: column; /* Stack messages from top to bottom */
+            justify-content: flex-start; /* Ensures messages align at the top */
+            align-items: flex-start; /* Aligns messages to the left */
+            flex-grow: 0; /* Prevents expansion */
+        }
+        
+        /* Individual message box */
         .message {
             display: flex;
-            align-items: center;
+            align-items: center; /* Aligns the content vertically */
             background-color: white;
             padding: 10px;
             margin: 10px 0;
-            align-self: flex-start;
-            font-size: 12px;
-          /*  border-radius: 10px;*/
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            align-self: flex-start; /* Prevents messages from stretching */
+            width: 100%; /* Ensures messages take up the right amount of space */
         }
 
         /* Profile picture circle */
