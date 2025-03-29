@@ -1,21 +1,23 @@
 * {
     margin: 0;
     padding: 0;
+    
 }
 
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
-.background {
-    background-image: url('worldmap.png'); /* Background image URL */
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    position: relative;
-    animation: scrollBackground 30s linear infinite;
-}
+.scrolling-image {
+            background-image: url('worldmap.png'); /* Replace with your scrolling image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Full viewport height */
+            position: relative;
+            animation: scrollBackground 20s linear infinite; /* Animate the scrolling */
+        }
 
 @keyframes scrollBackground {
     0% {
@@ -25,3 +27,13 @@ body, html {
         background-position: 0 -100%;
     }
 }
+
+.background {
+            background-color: #f0fbff
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0; /* Keeps background behind the content */
+        }
