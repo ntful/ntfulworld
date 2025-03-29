@@ -37,8 +37,10 @@
     /*    } */
 
         .message-container {
-            padding: 12px;
+            padding: 0 20px; /* Remove top padding to ensure content starts from the top */
+            margin: 0; /* Remove default margin */
             overflow-y: auto; /* Makes the message container scrollable */
+            display: flex;
             flex-direction: column; /* Stack messages vertically */
             justify-content: flex-start; /* Ensures messages align from the top of the container */
         } 
