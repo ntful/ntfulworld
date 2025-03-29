@@ -12,6 +12,7 @@ async function fetchMessages() {
         let response = await fetch(csvUrl);
         let csvText = await response.text();
         let messages = parseCSV(csvText);  // Parse CSV data into JSON
+         console.log(messages);
         displayMessages(messages);        // Display the messages
     } catch (error) {
         console.error("Error fetching CSV data:", error);
