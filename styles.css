@@ -1,64 +1,33 @@
-/* styles.css */
-
-#home-page {
-  height: 100vh; /* Full screen height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-#home-page h1 {
-  font-size: 2.5em;
-  color: #3498db;
-  margin-bottom: 20px;
-}
-#enter-btn {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#enter-btn:hover {
-  background-color: #2980b9;
-}
-/* Basic reset */
-* {
+/* Ensure the page takes up full height */
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+   background-color: rgba(240, 251, 255, 0.8);
 }
 
-
-/* Scrolling background effect */
-body {
-  margin: 0;
-  padding: 0;
+/* Scrolling background image */
+.background {
+  background-image: url('worldmap.png'); /* Replace with your background image */
+  background-attachment: fixed; /* This creates the scrolling/parallax effect */
+  background-size: cover; /* Ensure the background covers the entire viewport */
+  background-position: center; /* Center the background */
+  height: 100vh; /* Full height of the viewport */
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  opacity: 0.4
 }
 
-div {
-  height: 100vh; /* Full screen height */
-  overflow: hidden; /* Hide overflow */
-  background-image: url('worldmap.png');
-  opacity: 0.2;
-  background-repeat: repeat-x; /* Horizontal scrolling */
-  animation: scrollBackground 50s linear infinite;
+/* Centered content inside the div */
+.centered-content {
+  text-align: center; /* Center the content inside the div */
+  padding: 20px;
 }
 
-/* Scrolling effect */
-@keyframes scrollBackground {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -100% 0; /* Scroll horizontally */
-  }
+/* Make the image responsive inside the div */
+.centered-content img {
+  width: 80%;
+  max-width: 300px; /* Adjust the image size */
+  height: auto;
 }
-
