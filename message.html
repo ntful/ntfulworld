@@ -10,7 +10,6 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            display: flex;
             flex-direction: column;
             justify-content: space-between; /* Ensures space between top and bottom */
         }
@@ -19,7 +18,7 @@
         /* Header with MESSAGE label */
         header {
             color: #333;
-            padding: 10px 20px;
+            padding: 10px 10px;
             font-size: 17px;
             display: flex;
             align-items: center;
@@ -30,48 +29,50 @@
         }
 
 /* Style the message container */
+        /* Style the message container to take up available space and allow scrolling */
         .message-container {
-              margin: 0; /* Remove default margin */
             padding: 20px;
             overflow-y: auto; /* Makes the message container scrollable */
+            max-height: calc(100% - 60px); /* Ensures the message container takes up all available space except for the bottom buttons */
         }
-        
+                
         /* Individual message box */
-        .message {
-            display: flex;
-            align-items: center; /* Aligns the content vertically */
-            background-color: white;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            align-self: flex-start; /* Prevents messages from stretching */
-            width: 100%; /* Ensures messages take up the right amount of space */
-        }
-
-        /* Profile picture circle */
-        .profile-pic {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background-color: #ccc;
-            margin-right: 15px;
-        }
-
-        /* Name and message details */
-        .message-details {
-            display: flex;
-            flex-direction: column; /* Stack name and message vertically */
-        }
-
-        .name {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .message-text {
-            color: #555;
-        }
+            /* Ensure the message entry is displayed in a row (flex direction) */
+            .message {
+                display: flex;
+                align-items: center; /* Aligns the content vertically centered */
+                background-color: white;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Profile picture styling (keeps it circular and sized) */
+            .profile-pic {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #ccc;
+                margin-right: 15px; /* Space between the profile picture and message */
+            }
+            
+            /* Styling for the message details (name and message) */
+            .message-details {
+                display: flex;
+                flex-direction: column; /* Stack name and message vertically */
+            }
+            
+            /* Name styling */
+            .name {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            
+            /* Message text styling */
+            .message-text {
+                color: #555;
+            }
 
         /* Ensure the entire page is responsive */
         @media (max-width: 600px) {
