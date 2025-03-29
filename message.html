@@ -33,7 +33,10 @@
         .message-container {
             padding: 10px;
             display: flex;
+            overflow-y: auto; /* Makes the message container scrollable */
+            max-height: calc(100% - 60px);
             flex-direction: column;
+            align-items: flex-start;
         }
 
         /* Each individual message entry style */
