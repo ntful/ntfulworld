@@ -1,0 +1,31 @@
+/* styles.css */
+#home-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+#home-page h1 {
+  font-size: 2.5em;
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+#enter-btn {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#enter-btn:hover {
+  background-color: #2980b9;
+}
