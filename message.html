@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone App Style</title>
+    <style>
+        /* Reset margin and padding for the whole page */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensures space between top and bottom */
+        }
+
+        /* Content area to center anything you want in the middle */
+        .content {
+            flex: 1; /* Ensures the content area takes the available space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Bottom button container */
+        .bottom-buttons {
+            display: flex;
+            justify-content: space-around; /* Space out the buttons */
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            width: 100%;
+        }
+
+        /* Button styles */
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
 
