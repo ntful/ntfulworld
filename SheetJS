@@ -1,0 +1,52 @@
+<!-- Add SheetJS library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
+<script>
+    // Example function to read Excel file and output data
+    function readExcel(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const data = e.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const rows = XLSX.utils.sheet_to_json(sheet);
+            
+            // Example data extraction
+            rows.forEach(row => {
+                const messageContainer = document.querySelector('.message-container');
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                
+                // Create the profile picture (assuming URL is in the excel)
+                const profilePic = document.createElement('div');
+                profilePic.classList.add('profile-pic');
+                profilePic.style.backgroundImage = `url(${row.PictureURL})`; // Assuming Excel has a column for Picture URL
+
+                // Create the name and message content
+                const messageDetails = document.createElement('div');
+                messageDetails.classList.add('message-details');
+
+                const name = document.createElement('div');
+                name.classList.add('name');
+                name.textContent = row.Name;
+
+                const messageText = document.createElement('div');
+                messageText.classList.add('message-text');
+                messageText.textContent = row.Message;
+
+                messageDetails.appendChild(name);
+                messageDetails.appendChild(messageText);
+
+                messageDiv.appendChild(profilePic);
+                messageDiv.appendChild(messageDetails);
+
+                messageContainer.appendChild(messageDiv);
+            });
+        };
+        reader.readAsBinaryString(file);
+    }
+</script>
+
+<!-- File input to select the Excel file -->
+<input type="file" onchange="readExcel(this.files[0])">
