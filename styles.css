@@ -1,43 +1,4 @@
 /* styles.css */
-#home-page {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  background-color: #f0f0f0;
-}
-
-#home-page h1 {
-  font-size: 2.5em;
-  color: #3498db;
-  margin-bottom: 20px;
-}
-
-#enter-btn {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#enter-btn:hover {
-  background-color: #2980b9;
-}
-
-
-
-/* Basic reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 /* Home page container */
 #home-page {
@@ -66,28 +27,28 @@ body {
     background-position: center 100%;
   }
 }
-
-/* Title text */
 #home-page h1 {
   font-size: 2.5em;
-  color: white;
+  color: #3498db;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
-
-/* Enter button */
 #enter-btn {
   padding: 10px 20px;
   font-size: 1.2em;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s;
 }
 
 #enter-btn:hover {
-  background-color: rgba(0, 0, 0, 0.9);
-  transform: scale(1.05);
+  background-color: #2980b9;
+}
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
