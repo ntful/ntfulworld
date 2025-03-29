@@ -5,7 +5,7 @@
 
     <script>
     async function fetchMessages() {
-    let sheetID = "2025761224"; /* Replace with your actual Sheet ID*/
+    let sheetID = "2025761224";
     let url = `https://spreadsheets.google.com/feeds/list/${sheetID}/1/public/values?alt=json`;
 
     try {
@@ -24,9 +24,9 @@ function parseGoogleSheetData(data) {
 
     entries.forEach(row => {
         messages.push({
-            ProfilePicture: row.gsx$profilepicture.$t, /* Make sure column names match*/
-            Name: row.gsx$name.$t,
-            Message: row.gsx$message.$t
+            PPic: row.gsx$PPic.$t, /* Make sure column names match*/
+            Country: row.gsx$Country.$t,
+            nMsg: row.gsx$nMsg.$t
         });
     });
 
