@@ -44,6 +44,11 @@ function displayMessages(messages) {
         let profilePic = document.createElement("div");
         profilePic.classList.add("profile-pic");
         profilePic.style.backgroundImage = `url(${msg.PPic})`;
+        profilePic.style.backgroundSize = 'cover';  // or 'contain', depending on how you want it to fit
+        profilePic.style.width = '50px';
+        profilePic.style.height = '50px';
+        profilePic.style.backgroundPosition = 'center'; // Optionally center the image within the div
+        profilePic.style.backgroundRepeat = 'no-repeat'; // Prevent the image from repeating
 
         // Message Details (Country column for Name, nMsg for Message count)
         let detailsDiv = document.createElement("div");
