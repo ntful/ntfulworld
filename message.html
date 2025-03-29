@@ -30,12 +30,21 @@
         }
 
 /* Style the message container */
+    /*    .message-container {
+     /*       padding: 20px;
+     /*       overflow-y: auto; /* Makes the message container scrollable */
+    /*        max-height: calc(100% - 60px); /* Ensures the message container takes up all available space except for the bottom buttons */
+    /*    } */
+
         .message-container {
             padding: 20px;
             overflow-y: auto; /* Makes the message container scrollable */
             max-height: calc(100% - 60px); /* Ensures the message container takes up all available space except for the bottom buttons */
-        }
-
+            display: flex;         /* Flexbox container */
+            flex-direction: column; /* Stack messages vertically */
+            align-items: flex-start; /* Align messages to the top-left */
+        } 
+        
         /* Each individual message entry style */
         .message {
             display: flex;
@@ -59,7 +68,7 @@
         /* Name and message details */
         .message-details {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stack name and message vertically */
         }
 
         .name {
@@ -72,18 +81,23 @@
         }
 
         /* Ensure the entire page is responsive */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             header {
-                font-size: 18px;
+                font-size: 15px;
                 padding: 10px;
             }
 
             .message {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: column; /* Stack the profile pic, name, and message vertically on mobile */
+                align-items: flex-start; /* Align to the left on smaller screens */
             }
 
+            .message-details {
+                margin-top: 10px; /* Space between the profile pic and the name/message */
+                flex-direction: column;
+            }
             .profile-pic {
+                margin-right: 0; /* Remove space between the profile picture and message */
                 margin-bottom: 10px;
             }
         }
