@@ -43,7 +43,7 @@ function displayMessages(messages) {
         // Profile Picture (PPic column)
         let profilePic = document.createElement("div");
         profilePic.classList.add("profile-pic");
-        profilePic.style.backgroundImage = `url(${msg.PPic || 'default.jpg'})`; // Use 'PPic' from the sheet
+        profilePic.style.backgroundImage = msg.PPic; // Use 'PPic' from the sheet
 
         // Message Details (Country column for Name, nMsg for Message count)
         let detailsDiv = document.createElement("div");
