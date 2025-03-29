@@ -1,33 +1,27 @@
-/* Ensure the page takes up full height */
-html, body {
-  height: 100%;
+/* Basic reset */
+body, html {
   margin: 0;
-  font-family: Arial, sans-serif;
-   background-color: rgba(240, 251, 255, 0.8);
+  padding: 0;
+  height: 100%; /* Full viewport height */
 }
 
-/* Scrolling background image */
-.background {
-  background-image: url('worldmap.png'); /* Replace with your background image */
-  background-attachment: fixed; /* This creates the scrolling/parallax effect */
-  background-size: cover; /* Ensure the background covers the entire viewport */
-  background-position: center; /* Center the background */
+/* Make sure the div is visible with height and width */
+.scrolling-background {
+  width: 100%;
   height: 100vh; /* Full height of the viewport */
-  display: flex; /* Enable flexbox */
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
-  opacity: 0.4
+  background-image: url('worldmap.png'); /* Replace with your image path */
+  background-repeat: repeat; /* Set this if you want to repeat the background */
+  background-size: cover; /* Make the background cover the whole div */
+  background-color: rgba(240,251,255,0.7);
+  animation: scrollBackground 10s linear infinite; /* Scroll animation */
 }
 
-/* Centered content inside the div */
-.centered-content {
-  text-align: center; /* Center the content inside the div */
-  padding: 20px;
-}
-
-/* Make the image responsive inside the div */
-.centered-content img {
-  width: 80%;
-  max-width: 300px; /* Adjust the image size */
-  height: auto;
+/* Animation for scrolling background */
+@keyframes scrollBackground {
+  from {
+    background-position: 0 0; /* Start at the top-left */
+  }
+  to {
+    background-position: 0 100%; /* End at the bottom */
+  }
 }
