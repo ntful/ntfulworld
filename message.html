@@ -1,5 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    /**excel */
+
+    <script>
+async function fetchMessages() {
+    let sheetID = "2025761224"; // Replace with your actual Sheet ID
+    let url = `https://spreadsheets.google.com/feeds/list/${sheetID}/1/public/values?alt=json`;
+
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+        let messages = parseGoogleSheetData(data);
+        displayMessages(messages);
+    } catch (error) {
+        console.error("Error fetching Google Sheet data:", error);
+    }
+}
+
+function parseGoogleSheetData(data) {
+    let messages = [];
+    let entries = data.feed.entry;
+
+    entries.forEach(row => {
+        messages.push({
+            ProfilePicture: row.gsx$profilepicture.$t, // Make sure column names match
+            Name: row.gsx$name.$t,
+            Message: row.gsx$message.$t
+        });
+    });
+
+    return messages;
+}
+
+function displayMessages(messages) {
+    let container = document.getElementById("message-container");
+    container.innerHTML = ""; // Clear existing messages
+
+    messages.forEach(msg => {
+        let messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+
+        let profilePic = document.createElement("img");
+        profilePic.classList.add("profile-pic");
+        profilePic.src = msg.ProfilePicture || "default.jpg"; // Default if no image
+
+        let detailsDiv = document.createElement("div");
+        detailsDiv.classList.add("message-details");
+
+        let nameDiv = document.createElement("div");
+        nameDiv.classList.add("name");
+        nameDiv.textContent = msg.Name;
+
+        let textDiv = document.createElement("div");
+        textDiv.classList.add("message-text");
+        textDiv.textContent = msg.Message;
+
+        detailsDiv.appendChild(nameDiv);
+        detailsDiv.appendChild(textDiv);
+        messageDiv.appendChild(profilePic);
+        messageDiv.appendChild(detailsDiv);
+        container.appendChild(messageDiv);
+    });
+}
+
+// Call the function on page load
+fetchMessages();
+</script>
+
+    /* START HERE */
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,6 +207,7 @@
 
 
 <!-- Message Container (this is where dynamic content will go) -->
+    <input type="file" id="fileInput" accept=".xlsx, .xls">
     <div class="message-container">
         <div class="message">
             <!-- Profile picture -->
@@ -148,28 +220,12 @@
             </div>
         </div>
 
-        <div class="message">
-            <div class="profile-pic"></div>
-            <div class="message-details">
-                <div class="name">United States</div>
-                <div class="message-text">5 Messages.</div>
-            </div>
-        </div>
-
-        <div class="message">
-            <div class="profile-pic"></div>
-            <div class="message-details">
-                <div class="name">AE</div>
-                <div class="message-text">She rocks.</div>
-            </div>
-        </div>
-
         <!-- Add more message blocks as needed -->
     </div>
+    </input>
 
 
     
-
 
         
     <div class="bottom-buttons">
