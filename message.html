@@ -40,6 +40,14 @@ function displayMessages(messages) {
         let messageDiv = document.createElement("div");
         messageDiv.classList.add("message");
 
+         // Make the message div clickable
+        messageDiv.onclick = function() {
+            alert(`Message from ${msg.Country}: ${msg.nMsg} messages`); // Example action
+            // Or you can redirect to a new page like:
+            // window.location.href = 'some_page.html';
+
+        
+        
         // Profile Picture (PPic column)
         let profilePic = document.createElement("div");
         profilePic.classList.add("profile-pic");
