@@ -14,19 +14,29 @@
 
 /* Scrolling background effect */
 body {
-  background: url('worldmap.png') repeat-y center center/cover;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  height: 100vh; /* Full screen height */
+  overflow: hidden; /* Hide overflow */
+  background-image: url('worldmap.png');
+  background-repeat: repeat-x; /* Horizontal scrolling */
   animation: scrollBackground 20s linear infinite;
 }
 
-/* Vertical Scrolling Animation */
+/* Scrolling effect */
 @keyframes scrollBackground {
   from {
-    background-position: center 0;
+    background-position: 0 0;
   }
   to {
-    background-position: center 100%;
+    background-position: -100% 0; /* Scroll horizontally */
   }
 }
+
+
 #home-page h1 {
   font-size: 2.5em;
   color: #3498db;
