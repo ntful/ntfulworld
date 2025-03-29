@@ -1,17 +1,4 @@
 /* styles.css */
-
-/* Home page container */
-#home-page {
-  height: 100vh; /* Full screen height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
 /* Scrolling background effect */
 body {
   margin: 0;
@@ -22,9 +9,9 @@ div {
   height: 100vh; /* Full screen height */
   overflow: hidden; /* Hide overflow */
   background-image: url('worldmap.png');
-  opacity: 0.5;
+  opacity: 0.2;
   background-repeat: repeat-x; /* Horizontal scrolling */
-  animation: scrollBackground 20s linear infinite;
+  animation: scrollBackground 50s linear infinite;
 }
 
 /* Scrolling effect */
@@ -37,7 +24,16 @@ div {
   }
 }
 
-
+#home-page {
+  height: 100vh; /* Full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 #home-page h1 {
   font-size: 2.5em;
   color: #3498db;
