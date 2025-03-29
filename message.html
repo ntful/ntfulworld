@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone App Style</title>
+    <title>Message</title>
     <style>
         /* Reset margin and padding for the whole page */
         html, body {
@@ -12,6 +12,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             justify-content: space-between; /* Ensures space between top and bottom */
         }
 
@@ -34,21 +35,17 @@
             width: 100%;
         }
 
-        /* Button styles */
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 30%; /* Make buttons proportional */
+        /* Style for image buttons */
+        .button img {
+            width: 50px; /* Set the size of the images */
+            height: 50px; /* Maintain square shape */
+            object-fit: contain; /* Ensure image fits within the button */
+            cursor: pointer; /* Change cursor to indicate clickable */
         }
 
-        /* Hover effect on buttons */
-        .button:hover {
-            background-color: #45a049;
+        /* Hover effect for image buttons */
+        .button img:hover {
+            opacity: 0.8; /* Slight fade effect on hover */
         }
     </style>
 </head>
@@ -57,9 +54,15 @@
         <h1>Welcome to the Phone App</h1>
     </div>
     <div class="bottom-buttons">
-        <button class="button">Button 1</button>
-        <button class="button">Button 2</button>
-        <button class="button">Button 3</button>
+        <div class="button">
+            <img src="mbtn1.svg"> <!-- Replace with your image source -->
+        </div>
+        <div class="button">
+            <img src="mbtn1.svg"> <!-- Replace with your image source -->
+        </div>
+        <div class="button">
+            <img src="mbtn1.svg"> <!-- Replace with your image source -->
+        </div>
     </div>
 </body>
 </html>
