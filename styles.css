@@ -1,28 +1,4 @@
 /* styles.css */
-/* Scrolling background effect */
-body {
-  margin: 0;
-  padding: 0;
-}
-
-div {
-  height: 100vh; /* Full screen height */
-  overflow: hidden; /* Hide overflow */
-  background-image: url('worldmap.png');
-  opacity: 0.2;
-  background-repeat: repeat-x; /* Horizontal scrolling */
-  animation: scrollBackground 50s linear infinite;
-}
-
-/* Scrolling effect */
-@keyframes scrollBackground {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -100% 0; /* Scroll horizontally */
-  }
-}
 
 #home-page {
   height: 100vh; /* Full screen height */
@@ -59,3 +35,30 @@ div {
   padding: 0;
   box-sizing: border-box;
 }
+
+
+/* Scrolling background effect */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  height: 100vh; /* Full screen height */
+  overflow: hidden; /* Hide overflow */
+  background-image: url('worldmap.png');
+  opacity: 0.2;
+  background-repeat: repeat-x; /* Horizontal scrolling */
+  animation: scrollBackground 50s linear infinite;
+}
+
+/* Scrolling effect */
+@keyframes scrollBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100% 0; /* Scroll horizontally */
+  }
+}
+
