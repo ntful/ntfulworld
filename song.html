@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NTFUL WORLD</title>
     <link rel="stylesheet" href="style.css">
+
+    <script>
+    const lyrics = document.querySelectorAll("#lyrics p");
+    
+    // SoundCloud Widget API
+    const widget = SC.Widget(document.getElementById("soundcloud-player"));
+    
+    widget.bind(SC.Widget.Events.READY, function() {
+        console.log("Player is ready!");
+    
+        // Play the song automatically
+        widget.play();
+    });
+    
+    // Sync lyrics with the song
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(e) {
+        const currentTime = e.currentPosition / 1000; // Convert to seconds
+    
+        lyrics.forEach(line => {
+            const time = parseFloat(line.getAttribute("data-time"));
+            if (currentTime >= time) {
+                lyrics.forEach(l => l.classList.remove("highlight")); // Remove highlight
+                line.classList.add("highlight"); // Highlight active lyric
+            }
+        });
+    });
+    </script>
+    
 <style>
 
 /* SONG??? */
