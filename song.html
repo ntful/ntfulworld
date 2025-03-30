@@ -6,6 +6,62 @@
     <title>NTFUL WORLD</title>
     <link rel="stylesheet" href="style.css">
 <style>
+
+/* SONG??? */
+
+    /* General body styles */
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    
+    /* Container for centering content */
+    .container {
+        text-align: center;
+        width: 80%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* SoundCloud player: Square shape */
+    .soundcloud-player {
+        width: 100%;
+        padding-top: 100%; /* This ensures the player remains square */
+        position: relative;
+        background: #000;
+        margin-bottom: 20px;
+    }
+    
+    .soundcloud-player iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Lyrics section */
+    .lyrics p {
+        font-size: 18px;
+        margin: 5px 0;
+        transition: color 0.3s ease-in-out;
+    }
+    
+    /* Highlight the active lyric */
+    .highlight {
+        color: red;
+        font-weight: bold;
+    }
+
+    
+    
 /* WHAT EVER IS HERE SHOULD BE THE CONTENT */
         /* Bottom button container */
         .bottom-buttons {
