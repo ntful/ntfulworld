@@ -117,6 +117,8 @@ fetchMessages();
             padding: 20px;
             overflow-y: auto; /* Makes the message container scrollable */
            /* max-height: calc(100% - 60px); /* Ensures the message container takes up all available space except for the bottom buttons */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            width: 100%; /* Ensure it stays within the viewport */
             padding-bottom: 20%;
         }
                 
