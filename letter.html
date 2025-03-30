@@ -1,1 +1,101 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+
+<script>
+async function fetchMessages() {
+    // Replace this with your Google Sheets CSV link
+    let csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS0Ri0eCzLIMRiUvb-K9EodWY60qX_2QER8lHKqGLxrKIJEo4miWt3fYcPRrTYCQ4n5cSH0rnM7UjPb/pub?gid=2025761224&single=true&output=csv";
+
+    try {
+        let response = await fetch(csvUrl);
+        let csvText = await response.text();
+        let messages = parseCSV(csvText);  // Parse CSV data into JSON
+        displayMessages(messages);        // Display the messages
+    } catch (error) {
+        console.error("Error fetching CSV data:", error);
+    }
+}
+
+// Convert CSV text into JSON array
+function parseCSV(csvText) {
+    let rows = csvText.split("\n").map(row => row.split(","));
+    let headers = rows.shift().map(header => header.trim()); // Extract headers
+    return rows.map(row => {
+        let obj = {};
+        headers.forEach((header, i) => {
+            obj[header] = row[i] ? row[i].trim() : "";  // Map row data to headers
+        });
+        return obj;
+    });
+}
+
+
+// Call the fetchMessages function to load data when the page loads
+fetchMessages();
+</script>
+
+ 
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <style>
+     
+
+/* WHAT EVER IS HERE SHOULD BE THE CONTENT */
+        /* Bottom button container */
+        .bottom-buttons {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-around; /* Space out the buttons */
+            align-items: center;
+            background-color: #fff;
+            padding: 8px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* Style for image buttons */
+        .button img {
+            width: 36px; /* Set the size of the images */
+            height: 36px; /* Maintain square shape */
+            object-fit: contain; /* Ensure image fits within the button */
+            cursor: pointer; /* Change cursor to indicate clickable */
+        }
+
+        /* Hover effect for image buttons */
+        .button img:hover {
+            opacity: 0.8; /* Slight fade effect on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Messages</h1>
+    </header>
+
+
+
+    
+
+  <!-- HERE LIES THE BOTTOM BUTTON FOREVER -->
+    <div class="bottom-buttons">
+        <div class="button">
+            <a href = "message.html"><img src="mbtn2.svg"></a> <!-- Replace with your image source -->
+        </div>
+        <div class="button">
+            <a href = "map.html"><img src="wbtn1.svg"></a> <!-- Replace with your image source -->
+        </div>
+        <div class="button">
+            <a href = "song.html"><img src="sbtn1.svg"></a> <!-- Replace with your image source -->
+        </div>
+    </div>
+</body>
+</html>
