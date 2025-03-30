@@ -53,7 +53,7 @@ main {
     background-color: #9259ba;
     border-radius: 0 30px 30px 30px;
     padding: 20px;
-    margin: 5px 0 0 10px;
+    margin: 5px 50px 0 10px;
     line-height:normal;
 }
 
@@ -67,4 +67,5 @@ main {
 .chat-area {
     overflow-y: auto; /* scrollbar */
     padding-bottom: 64px !important;
+    
 }
