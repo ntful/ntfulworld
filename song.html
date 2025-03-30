@@ -48,51 +48,28 @@
             background-color: #f0f0f0;
         }
         
-        /* Container for centering content */
-        .container {
-            text-align: center;
-            width: 80%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        /* SoundCloud player: Square shape and adjusted position */
-        .soundcloud-player {
-            width: 100%;
-            padding-top: 100%; /* This ensures the player remains square */
-            position: relative;
-            background: #000;
-            margin-bottom: 20px; /* Adjust this space to control the gap between player and lyrics */
-            margin-top: 0; /* Remove any unnecessary margin-top */
-        }
-        
-        /* SoundCloud player iframe */
-        .soundcloud-player iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-            
-                /* Wrapper around the player to prevent overflow */
-            .soundcloud-wrapper {
-                width: 100%;
-                padding-top: 56.25%; /* 16:9 Aspect ratio (You can adjust for square or other ratios) */
-                position: relative;
-                margin-bottom: 20px; /* Adjust space between player and lyrics */
-            }
-            
-            /* SoundCloud iframe inside the wrapper */
-            .soundcloud-wrapper iframe {
-                position: absolute;
-                top: 0;
+        /* Fixed SoundCloud player */
+            .soundcloud-player {
+                position: fixed;
+                top: 20px;  /* 20px padding from the top */
                 left: 0;
+                right: 0;
                 width: 100%;
-                height: 100%;
+                background: #000;
+                z-index: 100;  /* Ensure the player stays on top */
             }
+            
+            /* Scrollable lyrics container */
+            .lyrics {
+                margin-top: 200px;  /* Give space below the fixed player */
+                padding: 20px;
+                max-height: 400px;  /* Set a maximum height for the scrollable area */
+                overflow-y: scroll;  /* Enable vertical scrolling */
+                background-color: #fff;
+                border: 1px solid #ddd;
+                font-size: 18px;
+        }
+
         
         /* Lyrics section */
         .lyrics {
@@ -144,15 +121,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="soundcloud-wrapper">
-            <div class="soundcloud-player">
-               <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2066327684&color=%23843464&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
-                <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/ntful" title="NTFUL" target="_blank" style="color: #cccccc; text-decoration: none;">NTFUL</a> · <a href="https://soundcloud.com/ntful/4ntx" title="마음의 형태 (My Heart)" target="_blank" style="color: #cccccc; text-decoration: none;">마음의 형태 (My Heart)</a></div>
-            </div>
-        <div>
 
-        <div id="lyrics" class="lyrics">
+ <!-- Fixed top SoundCloud player -->
+    <div class="soundcloud-player">
+          <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2066327684&color=%23843464&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
+            <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/ntful" title="NTFUL" target="_blank" style="color: #cccccc; text-decoration: none;">NTFUL</a> · <a href="https://soundcloud.com/ntful/4ntx" title="마음의 형태 (My Heart)" target="_blank" style="color: #cccccc; text-decoration: none;">마음의 형태 (My Heart)</a></div>
+    </div>
+
+            
+         <div class="lyrics">
             <p data-time="5">항상 혼자일 거라고 생각했었어</p>
             <p data-time="10">짐 나누지 않고</p>
             <p data-time="15">근데 네가 오고 다 변했어</p>
