@@ -38,61 +38,61 @@
 /* SONG??? */
 
     /* General body styles */
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
-
-/* Container for centering content */
-.container {
-    text-align: center;
-    width: 80%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* SoundCloud player: Square shape and adjusted position */
-.soundcloud-player {
-    width: 100%;
-    padding-top: 100%; /* This ensures the player remains square */
-    position: relative;
-    background: #000;
-    margin-bottom: 20px; /* Adjust this space to control the gap between player and lyrics */
-    margin-top: 0; /* Remove any unnecessary margin-top */
-}
-
-/* SoundCloud player iframe */
-.soundcloud-player iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* Lyrics section */
-.lyrics {
-    margin-top: 20px; /* Add a margin to ensure there's space between player and lyrics */
-}
-
-.lyrics p {
-    font-size: 12px;
-    margin: 5px 0;
-    transition: color 0.3s ease-in-out;
-}
-
-/* Highlight the active lyric */
-.highlight {
-    color: red;
-    font-weight: bold;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        
+        /* Container for centering content */
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* SoundCloud player: Square shape and adjusted position */
+        .soundcloud-player {
+            width: 100%;
+            padding-top: 100%; /* This ensures the player remains square */
+            position: relative;
+            background: #000;
+            margin-bottom: 20px; /* Adjust this space to control the gap between player and lyrics */
+            margin-top: 0; /* Remove any unnecessary margin-top */
+        }
+        
+        /* SoundCloud player iframe */
+        .soundcloud-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Lyrics section */
+        .lyrics {
+            margin-top: 20px; /* Add a margin to ensure there's space between player and lyrics */
+        }
+        
+        .lyrics p , span{
+            font-size: 12px;
+            margin: 5px 0;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        /* Highlight the active lyric */
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
 
     
     
