@@ -125,7 +125,6 @@ fetchMessages();
             .message {
                 display: flex;
                 align-items: center; /* Aligns the content vertically centered */
-                flex-wrap: wrap;
                 background-color: white;
                 padding: 10px;
                 margin: 10px 0;
@@ -133,6 +132,7 @@ fetchMessages();
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                 width: 100%; /* Ensures message stays within the container */
                 /*max-width: 600px; /* Optional: Set a max width to prevent too wide messages */
+                 flex-direction: row;
                 cursor: pointer;
             }
             
