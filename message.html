@@ -127,9 +127,9 @@ fetchMessages();
                /* align-items: center; /* Aligns the content vertically centered */
                 background-color: white;
                 padding: 10px;
-               /* margin: 10px 0;
+                margin: 10px 0;
                 border-radius: 10px;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
                 width: 70%; /* Ensures message stays within the container */
                 /*max-width: 600px; /* Optional: Set a max width to prevent too wide messages */
                  flex-direction: row;
@@ -165,7 +165,7 @@ fetchMessages();
         /* Ensure the entire page is responsive */
         @media (max-width: 600px) {
             header {
-                font-size: 16px;
+                font-size: 14px;
                 padding: 20px;
             }
 
@@ -177,6 +177,7 @@ fetchMessages();
             .message-details {
                 margin-top: 10px; /* Space between the profile pic and the name/message */
                 flex-direction: column;
+                width: 50%;
             }
             .profile-pic {
                 margin-right: 0; /* Remove space between the profile picture and message */
