@@ -4,247 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
   <title>Message</title>
-  <style>
-    /* Reset margin and padding for the whole page */
-    html, body {
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      flex-direction: column;
-      overflow-x: hidden; 
-      justify-content: space-between; /* Ensures space between top and bottom */
-    }
-    
-    /* WHAT EVER IS HERE SHOULD BE THE CONTENT */
-    /* Header with MESSAGE label */
-    header {
-      color: #333;
-      padding: 20px 5px;
-      font-size: 17px;
-      display: flex;
-      align-items: center;
-    }
-    
-    header h1 {
-      margin: 0;
-    }
-    
-    /* Style the message container */
-    /* Style the message container to take up available space and allow scrolling */
-    .message-container {
-      padding: 20px;
-      overflow-y: auto; /* Makes the message container scrollable */
-      /* max-height: calc(100% - 60px); /* Ensures the message container takes up all available space except for the bottom buttons */
-      overflow-x: hidden; /* Prevent horizontal scrolling */
-      width: 100%; /* Ensure it stays within the viewport */
-      padding-bottom: 55px;
-    }
-    
-    /* Individual message box */
-    /* Ensure the message entry is displayed in a row (flex direction) */
-    .message {
-      display: flex;
-      /* align-items: center; /* Aligns the content vertically centered */
-      background-color: white;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-      width: 100%; /* Ensures message stays within the container */
-      /*max-width: 600px; /* Optional: Set a max width to prevent too wide messages */
-      flex-direction: row;
-      cursor: pointer;
-    }
-    
-    /* Profile picture styling (keeps it circular and sized) */
-    .profile-pic {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #ccc;
-      margin-right: 16px; /* Space between the profile picture and message */
-    }
-    
-    /* Styling for the message details (name and message) */
-  
-    
-    /* Name styling */
-    .name {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    
-    /* Message text styling */
-    .message-text {
-      color: #555;
-    }
 
-    header {
-      font-size: 14px;
-      padding: 20px 20px 0 20px;
-    }
-      
-    /* Ensure the entire page is responsive */
-    @media (max-width: 600px) {
-
-      .message {
-        /* flex-direction: column; Stack the profile pic, name, and message vertically on mobile */
-        align-items: center; /* Align to the left on smaller screens */
-      }
-      
-      .message-details {
-        /* margin-top: 10px; Space between the profile pic and the name/message */
-        flex-direction: column;
-      }
-
-    }
-    
-    /* WHAT EVER IS HERE SHOULD BE THE CONTENT */
-    /* Bottom button container */
-    .bottom-buttons {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      justify-content: space-around; /* Space out the buttons */
-      align-items: center;
-      background-color: #fff;
-      padding: 8px;
-      width: 100%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      z-index: 10;
-    }
-    
-    /* Style for image buttons */
-    .button img {
-      width: 36px; /* Set the size of the images */
-      height: 36px; /* Maintain square shape */
-      object-fit: contain; /* Ensure image fits within the button */
-      cursor: pointer; /* Change cursor to indicate clickable */
-    }
-    
-    /* Hover effect for image buttons */
-    .button img:hover {
-      opacity: 0.8; /* Slight fade effect on hover */
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-  <script>
-    async function fetchMessages() {
-      // Replace this with your Google Sheets CSV link
-      let csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS0Ri0eCzLIMRiUvb-K9EodWY60qX_2QER8lHKqGLxrKIJEo4miWt3fYcPRrTYCQ4n5cSH0rnM7UjPb/pub?gid=2025761224&single=true&output=csv";
-      
-      try {
-        let response = await fetch(csvUrl);
-        let csvText = await response.text();
-        let messages = parseCSV(csvText);  // Parse CSV data into JSON
-        displayMessages(messages);        // Display the messages
-      } catch (error) {
-        console.error("Error fetching CSV data:", error);
-      }
-    }
-    
-    // Convert CSV text into JSON array
-    function parseCSV(csvText) {
-      let rows = csvText.split("\n").map(row => row.split(","));
-      let headers = rows.shift().map(header => header.trim()); // Extract headers
-      return rows.map(row => {
-        let obj = {};
-        headers.forEach((header, i) => {
-          obj[header] = row[i] ? row[i].trim() : "";  // Map row data to headers
-        });
-        return obj;
-      });
-    }
-    
-    // Function to display the messages
-    function displayMessages(messages) {
-      let container = document.getElementById("message-container");
-      container.innerHTML = ""; // Clear any existing messages
-      
-      messages.forEach(msg => {
-        let messageDiv = document.createElement("div");
-        messageDiv.classList.add("message");
-        
-        // Make the message div clickable
-        messageDiv.onclick = function() {
-          window.location.href = 'letter.html';
-        };
-        
-        
-        // Profile Picture (PPic column)
-        let profilePic = document.createElement("div");
-        profilePic.classList.add("profile-pic");
-        profilePic.style.backgroundImage = `url(${msg.PPic})`;
-        profilePic.style.backgroundSize = 'cover';  // or 'contain', depending on how you want it to fit
-        profilePic.style.width = '50px';
-        profilePic.style.height = '50px';
-        profilePic.style.backgroundPosition = 'center'; // Optionally center the image within the div
-        profilePic.style.backgroundRepeat = 'no-repeat'; // Prevent the image from repeating
-        
-        // Message Details (Country column for Name, nMsg for Message count)
-        let detailsDiv = document.createElement("div");
-        detailsDiv.classList.add("message-details");
-        
-        let nameDiv = document.createElement("div");
-        nameDiv.classList.add("name");
-        nameDiv.textContent = msg.Country;  // Use 'Country' for name
-        
-        let textDiv = document.createElement("div");
-        textDiv.classList.add("message-text");
-        textDiv.textContent = `${msg.nMsg}  Messages`;  // Use 'nMsg' for the message count
-        
-        detailsDiv.appendChild(nameDiv);
-        detailsDiv.appendChild(textDiv);
-        messageDiv.appendChild(profilePic);
-        messageDiv.appendChild(detailsDiv);
-        
-        container.appendChild(messageDiv);
-      });
-    }
-    
-    // Call the fetchMessages function to load data when the page loads
-    fetchMessages();
-  </script>
-  
 </head>
 <body>
-  <header>
+  <header class="p-4">
     <h1>Messages</h1>
   </header>
   
-  
-  
-  <div id="message-container" class="message-container">
-    <div class="message">
-      <div class="profile-pic"></div>
-      <div class="message-details">
-        <div class="name"></div>
-        <div class="message-text"></div>
-      </div>
+  <div id="message-list" class="h-100 overflow-y-auto" style="padding-bottom: 60px">
+    <div class="d-none p-2" data-component="message-item">
+      <a class="link" href="letter.html">
+        <div class="message">
+          <div class="profile-pic"><img scr = "https://placehold.co/100x100"></div>
+          <div class="message-details">
+            <div class="name">Soda</div>
+            <div class="message-text">1 Message</div>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
-  
-  
-  <!-- Message Container (this is where dynamic content will go) 
-  <div class="message-container">
-    <div class="message">
-      
-      <div class="profile-pic"></div>
-      
-      
-      <div class="message-details">
-        <div class="name">Japan</div>
-        <div class="message-text"> 3 Messages.</div>
-      </div>
-    </div>
-  </div> -->
-  
-  
-  
-  
-  
+
   <div class="bottom-buttons">
     <div class="button">
       <a href = "message.html"><img src="mbtn2.svg"></a> <!-- Replace with your image source -->
@@ -256,5 +38,35 @@
       <a href = "song.html"><img src="sbtn1.svg"></a> <!-- Replace with your image source -->
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    $(function () {
+      $.getJSON('msgs.json', function (json) {
+        var $messageItem = $('[data-component="message-item"]').clone();
+        var $messageList = $('#message-list');
+
+        var data = {};
+        json.forEach(function (item) {
+          data[item.Country] = data[item.Country] || [];
+          data[item.Country].push(item);
+        });
+
+        Object.keys(data).forEach(function (country) {
+          var messageList = data[country];
+          var $newMessage = $messageItem.clone();
+
+          $newMessage.removeClass('d-none');
+          $newMessage.find('.name').text(country);
+          $newMessage.find('.message-text').text(messageList.length + ' messages');
+
+          var letterParams = $.param({ c: country });
+          $newMessage.find('.link').prop('href', 'letter.html?' + letterParams);
+          
+          console.log(messageList);
+          $messageList.append($newMessage);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

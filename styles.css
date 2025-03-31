@@ -2,15 +2,24 @@ body, html {
     height: 100%;
     font-family: Arial, sans-serif;
     overflow: hidden;
-    background-color: rgb(240, 250,255);
 }
+
 
 header {
     background-color: white;
 }
 
+header h1{
+    font-size:1.5em;
+    color:#464646;
+}
+
 main {
     background-color: #f7f7f7;
+}
+
+.map-bg{
+    background-color: rgb(240, 250,255);
 }
 
 /* WHAT EVER IS HERE SHOULD BE THE CONTENT */
@@ -28,6 +37,68 @@ main {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 10;
 }
+  
+  /* Individual message box */
+  /* Ensure the message entry is displayed in a row (flex direction) */
+  .message {
+    display: flex;
+    /* align-items: center; /* Aligns the content vertically centered */
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    width: 100%; /* Ensures message stays within the container */
+    /*max-width: 600px; /* Optional: Set a max width to prevent too wide messages */
+    flex-direction: row;
+    cursor: pointer;
+  }
+  
+  /* Profile picture styling (keeps it circular and sized) */
+  .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 16px; /* Space between the profile picture and message */
+  }
+  
+  /* Styling for the message details (name and message) */
+  /* Name styling */
+  .name {
+    font-weight: bold;
+  }
+
+  .chat-area .name {
+    margin: 0 0 0 10px;
+  }
+
+  [data-component="message-item"] a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Message text styling */
+  .message-text {
+    color: #555;
+  }
+    
+  /* Ensure the entire page is responsive */
+  @media (max-width: 600px) {
+
+    .message {
+      /* flex-direction: column; Stack the profile pic, name, and message vertically on mobile */
+      align-items: center; /* Align to the left on smaller screens */
+    }
+    
+    .message-details {
+      /* margin-top: 10px; Space between the profile pic and the name/message */
+      flex-direction: column;
+    }
+
+  }
+
+
+
 
 /* Style for image buttons */
 .button img {
@@ -50,7 +121,7 @@ main {
 }
 
 .chat-balloon {
-    background-color: #9259ba;
+    background-color: #ededed;
     border-radius: 0 30px 30px 30px;
     padding: 20px;
     margin: 5px 50px 0 10px;
@@ -60,12 +131,21 @@ main {
 .name {
     display: block;
     font-weight: bold;
-    margin: 0 0 0 10px;
-    font-size: 1.1em;
+    margin: 0;
+    font-size: 1em;
 }
 
 .chat-area {
     overflow-y: auto; /* scrollbar */
     padding-bottom: 64px !important;
+    background-color: #cbc3d1;
+    font-size: .9em;
     
+}
+
+.lyric-area{
+    overflow-y: auto; /* scrollbar */
+    padding-bottom: 100px !important;
+    font-size: .9em;
+    text-align: center;
 }

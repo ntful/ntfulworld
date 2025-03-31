@@ -6,179 +6,40 @@
   <title>Message</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
-    <script>
-    const lyrics = document.querySelectorAll("#lyrics p , span");
-    
-    // SoundCloud Widget API
-    const widget = SC.Widget(document.getElementById("soundcloud-player"));
-    
-    widget.bind(SC.Widget.Events.READY, function() {
-        console.log("Player is ready!");
-    
-        // Play the song automatically
-        widget.play();
-    });
-    
-    // Sync lyrics with the song
-    widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(e) {
-        const currentTime = e.currentPosition / 1000; // Convert to seconds
-    
-        lyrics.forEach(line => {
-            const time = parseFloat(line.getAttribute("data-time"));
-            if (currentTime >= time) {
-                lyrics.forEach(l => l.classList.remove("highlight")); // Remove highlight
-                line.classList.add("highlight"); // Highlight active lyric
-            }
+
+  <script>
+    // Fetch the JSON data from the external file (lyrics.json)
+    fetch('lyrics.json')
+      .then(response => response.json())  // Convert the response to JSON
+      .then(jsonData => {
+        // Loop through and display each line of lyrics
+        const lyrics = document.getElementById('lyrics');
+        
+        // Assuming jsonData.lyrics is an array
+        jsonData.lyrics.forEach(line => {
+          const p = document.createElement('p');
+          p.innerHTML = line;
+          lyrics.appendChild(p); // Append each <p> element with a line of lyrics
         });
-    });
-    </script>
+      })
+      .catch(error => console.error('Error fetching JSON:', error)); // Handle errors
+  </script>
 <style>
-/* SONG??? */
-
-    /* General body styles */
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding-bottom:30px;
-        }
-        
-                /* Container for centering content */
-                .container {
-                    height: 100vh;
-                    text-align: center;
-                    width: 80%;
-                    max-width: 300px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-                
-                /* SoundCloud player: Square shape */
-                .soundcloud-player {
-                    width: 100%;
-                    padding-top: 100%; /* This ensures the player remains square */
-                    position: relative;
-                    margin-top:10%;
-                    margin-bottom: 8px;
-                }
-                
-                .soundcloud-player iframe {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                }
-            
-            /* Scrollable lyrics container */
-            .lyrics {
-                margin-top: 20px;  /* Give space below the fixed player */
-                padding: 5px;
-                max-height: 300px;  /* Set a maximum height for the scrollable area */
-                overflow-y: scroll;  /* Enable vertical scrolling */
-                font-size: 14px;
-                font : futura ;
-                margin-bottom: 20%;
-        }
-
-        
-        /* Lyrics section */
-        .lyrics {
-            margin-top: 20px; /* Add a margin to ensure there's space between player and lyrics */
-        }
-        
-        .lyrics p , span{
-            font-size: 12px;
-            margin: 5px 0;
-            transition: color 0.3s ease-in-out;
-        }
-        
-        /* Highlight the active lyric */
-        .highlight {
-            color: red;
-            font-weight: bold;
-        }
-
-    
-
-    </style>
+    p{
+        padding: 0;
+        margin: 0;
+    }
+</style>
 </head>
-<body>
- <div class="d-flex container">
- <!-- Fixed top SoundCloud player -->
-    <div class="soundcloud-player">
-          <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2066327684&color=%23843464&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
-            <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/ntful" title="NTFUL" target="_blank" style="color: #cccccc; text-decoration: none;">NTFUL</a> · <a href="https://soundcloud.com/ntful/4ntx" title="마음의 형태 (My Heart)" target="_blank" style="color: #cccccc; text-decoration: none;">마음의 형태 (My Heart)</a></div>
-    </div>
-
-            
-         <div class="lyrics">
-            <p data-time="5">항상 혼자일 거라고 생각했었어</p>
-            <p data-time="10">짐 나누지 않고</p>
-            <p data-time="15">근데 네가 오고 다 변했어</p>
-            <p data-time="20">난 행복을 몰랐었고</p>
-            <br>
-            <p data-time="25">Quiero saber de ti, de todo lo que haces</p>
-            <p data-time="30">Me has cambiado, soy otra persona</p>
-            <p data-time="35">E quando a noite chega, não estou sozinho</p>
-            <p data-time="40">Tenho amigos que me confortam</p>
-            <br>
-            <p data-time="45">어떻게든 넌 날 다시 살게 만들어 줘</p>
-            <p data-time="50">나 지금 꿈꾸는 중인지 알고 싶어</p>
-            <p data-time="65">네가 목표 향해 노력하는 걸 보며</p>
-            <p data-time="70">나도 더 빛나고 싶어져</p>
-            <br>
-            <p data-time="75">如漆黑梦境里倾泻而下的银河</p>
-            <p data-time="80">哪怕彼此间记忆搁浅 时间停格</p>
-            <p data-time="85">在爱意感应中平行线终会重合</p>
-            <p data-time="90">Prometo, nunca me vais falhar</p>
-            <br>
-            <p data-time="95">시간을 멈춰 우리 계속 이렇게 있자</p>
-            <p data-time="100">Just looking at your eyes, feels like I finally get to have some rest</p>
-            <p data-time="105">And every time I think of you, there’s fireworks up in my head</p>
-            <span data-time="110">Oh, oh-oh,</span> <span data-time="115">finalmente entendi</span>
-            <br>
-            <span data-time="120">너,</span><span data-time="125"> ang palaging nandyaan</span><br>
-            <span data-time="130">너,</span><span data-time="135"> diz que ficará tudo bem</span><br>
-            <span data-time="140">나,</span><span data-time="145"> takkan ubah fikiran</span>
-            <p data-time="150">Para onde fores, é para lá que eu vou</p>
-            <br>
-            <p data-time="155">어떻게든 넌 날 다시 살게 만들어 줘</p>
-            <p data-time="160">나 지금 꿈꾸는 중인지 알고 싶어</p>
-            <p data-time="165">네가 목표 향해 노력하는 걸 보며</p>
-            <p data-time="170">나도 더 빛나고 싶어져</p>
-            <br>
-            <p data-time="200">どんな　時でも　つながってる</p>
-            <p data-time="205">終わりが　来ても　幸せだよ</p>
-            <p data-time="210">同じ　星を　見つめたから</p>
-            <p data-time="215">Prometo, nunca me vais falhar</p>
-            <br>
-            <p data-time="220">Kapag nahihirapan ka </p>
-            <p data-time="225">Lo vamos a lograr</p>
-            <p data-time="230">Semuanya untukmu</p>
-            <br>
-            <p data-time="235">Whenever things get hard</p>
-            <p data-time="240">I’ll mend your broken heart</p>
-            <p data-time="245">I’d do it all for you</p>
-            <br>
-            <span data-time="250">어떻게든 넌 날 다시 살게 만들어 줘 </span><span data-time="255"> (つらい時は)</span> <br>
-            <span data-time="260">나 지금 꿈꾸는 중인지 알고 싶어 </span><span data-time="265"> (Kan ku rawat hatimu)</span><br>
-            <span data-time="270">네가 목표 향해 노력하는 걸 보며 </span><span data-time="275"> (不放开你的手)</span>
-            <p data-time="5">나도 더 빛나고 싶어져</p>
-            <br>
-            <span data-time="280">네가 내 하루를 사랑으로 채워내 </span><span data-time="285"> (Whenever things get hard)</span><br>
-            <span data-time="290">모든 게 틀려도 난 여전히 행복해 </span><span data-time="300"> (Lo vamos a lograr)</span><br>
-            <span data-time="305">너와 같은 시간 속에 존재하니까 </span><span data-time="310"> (Gagawin para sayo)</span>
-            <p data-time="315">Prometo, nunca me vais falhar</p>
+<body style="background: #fefefe">
+    <div class="d-flex flex-column mb-4 h-100">
+        <div class = "p-5" style = "text-align: center;">
+            <iframe width="300px" height="300px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2066327684&color=%23843464&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
         </div>
-    </div>
- </div>
-    <script src="https://w.soundcloud.com/player/api.js"></script>
-    <script src="script.js"></script>
+        <div class = "lyric-area" style="overflow-y:auto;">
+            <p id ="lyrics"></p>
+        </div>  
+      </div>
     
 
  <!-- JUST BOTTOM BUTTONS! DO NOT TOUCH! -->       

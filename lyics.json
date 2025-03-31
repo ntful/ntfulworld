@@ -1,0 +1,132 @@
+{
+    "og-lyrics":{
+        "kr":{
+            "verse1":[
+                "항상 혼자일 거라고 생각했었어",
+                "짐 나누지 않고",
+                "근데 네가 오고 다 변했어",
+                "난 행복을 몰랐었고"
+            ],
+            "chorus1":[
+                "어떻게든 넌 날 다시 살게 만들어 줘",
+                "나 지금 꿈꾸는 중인지 알고 싶어",
+                "네가 목표 향해 노력하는 걸 보며",
+                "나도 더 빛나고 싶어줘"
+            ],
+            "rap":[
+                "시간을 멈춰 우리 계속 이렇게 있자"
+            ],
+            "chorus2":[
+                "네가 내 하루를 사랑으로 채워내",
+                "모든 게 틀려도 난 여전히 행복해",
+                "너와 같은 시간 속에 존재하니까"
+            ],
+            "you":[
+                "너,"
+            ],
+            "me":[
+                "나,"
+            ]
+        },
+
+        "br":{
+            "verse2":[
+                "E quando a noite chega, não estou sozinho",
+                "Tenho amigos que me confortam"
+            ],
+            "rap":[
+                "finalmente entendi"
+            ],
+            "verse4":[
+                "diz que ficará tudo bem"
+            ]
+        },
+
+        "ch":{
+            "chorus":[
+                "如漆黑梦境里倾泻而下的银河",
+                "哪怕彼此间记忆搁浅 时间停格",
+                "在爱意感应中平行线终会重合"
+            ],
+            "bridge":[
+                "(不放开你的手)"
+            ]
+        },
+        
+        "eng":{
+            "rap":[
+                "Just looking at your eyes, feels like I finally get to have some rest",
+                "And every time I think of you, there’s fireworks up in my head"
+            ],
+            "oh":[
+                "Oh, oh-oh,"
+            ],
+            "bridge":[
+                "(Whenever things get hard)"
+            ]
+
+        },
+
+        "all":{
+            "oh":[
+                "Oh, oh-oh"
+            ],
+            "bridge":[
+                "Whenever things get hard",
+                "I'll mend your broken heart",
+                "I'd do it all for you"
+            ]
+        },
+
+        "esp":{
+            "verse2":[
+                "Quiero saber de ti, de todo lo que haces",
+                "Me has cambiado, soy otra persona"
+            ],
+            "bridge":[
+                "Lo vamos a lograr",
+                "(Lo vamos a lograr)"
+            ]
+
+        },
+
+        "por":[
+            "Prometo, nunca me vais falhar",
+            "Para onde fores, é para lá que eu vou"
+        ],
+
+        "fil":{
+            "verse":[
+                "ang palaging nandyaan"
+            ],
+            "bridge":[
+                "kapag nahihirapan ka",
+                "(gagawin para sayo)"
+            ]
+        },
+
+        "my":{
+            "verse":[
+                "takkan ubah fikiran"
+            ],
+            "bridge":[
+                "emuanya untukmu",
+                "(Kan ku rawat hatimu)"
+            ]
+
+        },
+
+        "jp":{
+            "chorus":[
+                "どんな　時でも　つながってる",
+                "終わりが　来ても　幸せだよ",
+                "同じ　星を　見つめたから"
+            ],
+            "bridge":[
+                "(つらい時は)"
+            ]
+
+        }
+
+    }
+}
