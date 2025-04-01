@@ -60,6 +60,7 @@ main {
     border-radius: 50%;
     background-color: #ccc;
     margin-right: 16px; /* Space between the profile picture and message */
+    object-fit: cover;
   }
   
   /* Styling for the message details (name and message) */

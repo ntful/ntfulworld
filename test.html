@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Info from JSON</title>
+  <style>
+    .country-info {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+    }
+    .country-info img {
+      width: 50px;
+      height: auto;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Country Information</h1>
+
+  <div id="countryList"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    // JSON array (Example)
+    var countriesJson = [
+      { "name": "India" },
+      { "name": "Japan" },
+      { "name": "USA" }
+    ];
+
+    // Function to get country information from RestCountries API
+    function getCountryInfo(countryName) {
+      $.getJSON(`https://restcountries.com/v3.1/name/${countryName}`, function(data) {
+        // Extract relevant data from API response
+        const countryData = data[0];
+        const countryCode = countryData.cca2; // Alpha-2 country code
+        const countryFlag = countryData.flags.png; // Flag URL
+
+        // Create HTML to display the country info
+        const countryHtml = `
+          <div class="country-info">
+            <img src="${countryFlag}" alt="Flag of ${countryName}">
+            <div><strong>Country:</strong> ${countryName}</div>
+            <div><strong>Country Code:</strong> ${countryCode}</div>
+          </div>
+        `;
+
+        // Append the country information to the list
+        $('#countryList').append(countryHtml);
+      }).fail(function() {
+        console.error('Error fetching country data for ' + countryName);
+      });
+    }
+
+    // Loop through the JSON array and get information for each country
+    countriesJson.forEach(function(country) {
+      getCountryInfo(country.name);
+    });
+  </script>
+
+</body>
+</html>

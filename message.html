@@ -13,11 +13,11 @@
     <h1>Messages</h1>
   </header>
   
-  <div id="message-list" class="h-100 overflow-y-auto" style="padding-bottom: 60px">
+  <div id="message-list" class="h-100 overflow-y-auto" style="padding-bottom: 150px">
     <div class="d-none p-2" data-component="message-item">
       <a class="link" href="letter.html">
         <div class="message">
-          <div class="profile-pic"><img scr = "https://placehold.co/100x100"></div>
+          <img class ="profile-pic" src = "https://placehold.co/100x100">
           <div class="message-details">
             <div class="name">Soda</div>
             <div class="message-text">1 Message</div>
@@ -52,12 +52,27 @@
         });
 
         Object.keys(data).forEach(function (country) {
-          var messageList = data[country];
-          var $newMessage = $messageItem.clone();
+         var messageList = data[country];
+         var $newMessage = $messageItem.clone();
 
           $newMessage.removeClass('d-none');
           $newMessage.find('.name').text(country);
-          $newMessage.find('.message-text').text(messageList.length + ' messages');
+          $newMessage.find('.message-text').text(messageList.length + ' messages');          
+
+
+          // Set the profile picture from the CPic field in the JSON
+            var profilePicUrl = ''; // Default value
+          messageList.forEach(function (msg) {
+            if (msg.Country === country) {
+              profilePicUrl = msg.CPic; // Get the CPic for the matching country
+            }
+          });
+
+          // If a profile pic URL is found, set it in the image tag
+          if (profilePicUrl) {
+            $newMessage.find('.profile-pic').attr('src', profilePicUrl);
+          }
+
 
           var letterParams = $.param({ c: country });
           $newMessage.find('.link').prop('href', 'letter.html?' + letterParams);
@@ -67,6 +82,9 @@
         });
       });
     });
+
+    
   </script>
+
 </body>
 </html>

@@ -29,14 +29,38 @@
         padding: 0;
         margin: 0;
     }
+    .gradient-text {
+      background: linear-gradient(0deg, #bfdfea, #681899); /* Two colors */
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 </style>
 </head>
-<body style="background: #fefefe">
+<body style="background: #1b1b1b">
     <div class="d-flex flex-column mb-4 h-100">
-        <div class = "p-5" style = "text-align: center;">
-            <iframe width="300px" height="300px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2066327684&color=%23843464&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
-        </div>
-        <div class = "lyric-area" style="overflow-y:auto;">
+        <div class = "p-1" style = "text-align: center; margin-top:10px">
+            
+            <marquee><span style = "font-size: 10px; color:#bdbdbd">[Credits] Composer: 나나 | Lyricists: 나나, 아나, 카시, 탕위안, 리오, 슈리, 조셀리니, 나나뿌잉, Malu, Soda, Iryz, Ann |
+              Special Thanks to: 시오, YG, Leo, 상민 </marquee></span>
+            
+            <p style="font-size: 30px; color:#eaeaea"><b>마음의 형태 (My Heart)</p></b>
+            <p style="font-size: 11px ; color:#eaeaea">[ALL]
+              <span style = "color:#f05e16">[나나]</span>
+              <span style = "color:#006400">[아나]</span>
+              <span style = "color:#681899">[카시]</span>
+              <span style = "color:#bfdfea">[탕위안]</span>
+              <span style = "color:#ffb347">[리오]</span>
+              <span style = "color:#a8a9ad">[조셀리니]</span>
+              <span style = "color:#ffb7ce">[나나뿌잉]</span>
+              <span style = "color:#9c12ff">[Malu]</span>
+              <span style = "color:#1c949a">[Soda]</span>
+              <span style = "color:#f05e16">[Iryz]</span>
+              <span style = "color:#c748aa">[Ann]</span>
+            </p>
+            <div style = "margin-top: 10px"><iframe width="300px" height="300px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2066327684&color=%23843464&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>
+            </div>
+          </div>
+        <div class = "lyric-area" style="overflow-y:auto; color:#eaeaea">
             <p id ="lyrics"></p>
         </div>  
       </div>
