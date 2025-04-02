@@ -158,6 +158,7 @@ main {
   display: inline-block;
   cursor: pointer;
   transition: background-color 0.3s;
+  color:#555
 }
 .btn-trans:hover{
   background-color: #555;
