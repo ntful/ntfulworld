@@ -150,3 +150,20 @@ main {
     font-size: .9em;
     text-align: center;
 }
+
+.btn-trans{
+  background-color: #ccc;
+  font-size:12px;
+  border:none;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-trans:hover{
+  background-color: #555;
+  color: #ccc;
+}
+.btn-trans:active{
+  background-color: #555;
+  color: #ccc;
+}
