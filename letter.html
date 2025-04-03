@@ -80,7 +80,7 @@
           var $newChatItem = $chatTemplate.clone();
           $newChatItem.find('.name').text(msg.Name);
           $newChatItem.find('.chat-balloon').text(msg.Message);
-          $newChatItem.find('.chat-thumb').attr('src',msg.CPic);
+          $newChatItem.find('.chat-thumb').attr('src','img/'+msg.Ppic+".jpg");
           $newChatItem.removeClass('d-none');
           console.log(msg);
           $chatArea.append($newChatItem);

@@ -119,6 +119,8 @@ main {
     height: 64px;
     border-radius: 50%;
     overflow: hidden;
+    object-fit: cover;
+    
 }
 
 .chat-balloon {
