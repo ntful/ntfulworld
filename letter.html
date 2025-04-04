@@ -139,7 +139,7 @@
 
               // Only add translation if showTranslation is true and Message1 exists
               if (showTranslation && msg.Message1) {
-                messageHTML += "<hr>" + msg.Message1;
+                messageHTML += "<hr> <span style='color:#9259ba'>" + msg.Message1 + "</span>";
               }
 
               $newChatItem.find('.chat-balloon').html(messageHTML);

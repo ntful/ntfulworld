@@ -177,7 +177,13 @@ hr {
   color: #ccc;
 }
 
-.trans-btn{
+.trans-btn {
+  all: unset;
   border:none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
