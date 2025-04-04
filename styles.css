@@ -17,6 +17,12 @@ header h1{
 main {
     background-color: #f7f7f7;
 }
+hr {
+  border: none;
+  border-top: 2px dashed #8b8b8b;  /* Creates a dashed line */
+  height: 0;
+  margin: 10px 0;
+}
 
 .map-bg{
     background-color: rgb(240, 250,255);
@@ -169,4 +175,9 @@ main {
 .btn-trans:active{
   background-color: #555;
   color: #ccc;
+}
+
+.trans-btn{
+  border:none;
+  background-color: transparent;
 }
