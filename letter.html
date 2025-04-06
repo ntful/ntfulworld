@@ -127,9 +127,9 @@
               // Days since date
               const dayCount = daysSince(msg.Date);
                if (dayCount !== null) {
-                  $newChatItem.find('.heart').html(`<p style="color: ${msg.Heart} ">❤︎ <span style ="color:#000">+${dayCount}</span>`);
+                  $newChatItem.find('.heart').html(`<p style="align-text:center; color: ${msg.Heart} ">❤︎ <span style ="color:#000">+${dayCount}</span>`);
                 } else {
-                 $newChatItem.find('.heart').html(`<p style="color: ${msg.Heart} "> ❤︎`);
+                 $newChatItem.find('.heart').html(`<p style=" align-text:center; color: ${msg.Heart} "> ❤︎`);
                 }
 
               $newChatItem.removeClass('d-none');
