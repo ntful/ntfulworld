@@ -17,7 +17,7 @@
     <header class="p-4">
       <div class = "d-flex" style = "justify-content: space-between;">
         <a href = "message.html" style = "text-decoration: none ; color: inherit ; ;" ><b>&lt; </b></a>
-        <center><span id="ctitle"> sample</span></center>
+        <center><span id="ctitle"></span></center>
         <button id = "trans-btn" class ="trans-btn">
           <svg fill="#fefefe" stroke="#9259ba" stroke-width="2" width="20px" height="20px" viewBox="0 0 52 52" data-name="trans 1" id="trans" xmlns="http://www.w3.org/2000/svg"><path d="M39,18.67H35.42l-4.2,11.12A29,29,0,0,1,20.6,24.91a28.76,28.76,0,0,0,7.11-14.49h5.21a2,2,0,0,0,0-4H19.67V2a2,2,0,1,0-4,0V6.42H2.41a2,2,0,0,0,0,4H7.63a28.73,28.73,0,0,0,7.1,14.49A29.51,29.51,0,0,1,3.27,30a2,2,0,0,0,.43,4,1.61,1.61,0,0,0,.44-.05,32.56,32.56,0,0,0,13.53-6.25,32,32,0,0,0,12.13,5.9L22.83,52H28l2.7-7.76H43.64L46.37,52h5.22Zm-15.3-8.25a23.76,23.76,0,0,1-6,11.86,23.71,23.71,0,0,1-6-11.86Zm8.68,29.15,4.83-13.83L42,39.57Z"/></svg>
         </button>
@@ -69,6 +69,8 @@
         var query = new URLSearchParams(location.search);
         var ccode = query.get('c');
         var messages = data[ccode];
+
+        document.getElementById('ctitle').textContent = ccode;
 
   
         var $chatTemplate = $('[data-component="chat-item"]');
@@ -146,9 +148,9 @@
               // Days since date
               const dayCount = daysSince(msg.Date);
                if (dayCount !== null) {
-                  $newChatItem.find('.heart').html(`<p style="align-items:center; color: ${msg.Heart} ">❤︎ <span style ="color:#000">+${dayCount}</span>`);
+                  $newChatItem.find('.heart').html(`<center><p style="align-items:center; color: ${msg.Heart} ">❤︎ <span style ="color:#000">+${dayCount}</span></center>`);
                 } else {
-                  $newChatItem.find('.heart').html(`<p style="align-items:center; color: ${msg.Heart} "> ❤︎`);
+                  $newChatItem.find('.heart').html(`<center><p style="align-items:center; color: ${msg.Heart} "> ❤︎</center>`);
                 }
 
               $newChatItem.removeClass('d-none');

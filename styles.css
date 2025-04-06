@@ -199,3 +199,7 @@ hr {
   justify-self: center;
   font-size:12px;
 }
+
+.ctitle{
+  font-weight: bold;
+}
