@@ -87,6 +87,13 @@
           const diffTime = today - pastDate;
           return Math.floor(diffTime / (1000 * 60 * 60 * 24));
         }
+
+        // Helper function to check if the image exists
+        function imageExists(imagePath) {
+          var img = new Image();
+          img.src = imagePath;
+          return img.complete;
+        }
   
         // Function to render messages
         function renderMessages() {
@@ -105,12 +112,18 @@
               }
 
               $newChatItem.find('.chat-balloon').html(messageHTML);
-              $newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".jpg");
-              $newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".JPG");
+              //$newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".JPG");
+              //$newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".jpg");
 
-              
-              // Heart color
-             // $newChatItem.find('.heart').html('<p style="color:' + msg.Heart + '">❤︎');
+              // Set image source based on file existence (jpg or JPG)
+              var imagePath = 'img/' + msg.Ppic + ".jpg"; // Default to .jpg
+              if (!imageExists(imagePath)) {  // Check if the .jpg exists
+                  imagePath = 'img/' + msg.Ppic + ".JPG"; // Fallback to .JPG if .jpg doesn't exist
+              }
+
+              $newChatItem.find('.chat-thumb').attr('src', imagePath);
+
+
               // Days since date
               const dayCount = daysSince(msg.Date);
                if (dayCount !== null) {
