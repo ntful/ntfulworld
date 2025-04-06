@@ -28,6 +28,7 @@
       <div class="d-flex mb-4 d-none" data-component="chat-item">
         <div>
           <img class="chat-thumb" src="https://placehold.co/250x250" alt="">
+          <p class="heart">❤︎ <span class="xxx">+780</span></p>
         </div>
         <div>
           <div class="name">CHANGHUN</div>
@@ -53,60 +54,7 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <!-- <script>
-    $(function () {
-      $.getJSON('msgs.json', function (json) {
-
-        var data = {};
-        json.forEach(function (item) {
-          data[item.Country] = data[item.Country] || [];
-          data[item.Country].push(item);
-        });
-
-        var query = new URLSearchParams(location.search);
-        var ccode = query.get('c');
-        var messages = data[ccode];
-        
-
-        var $chatTemplate = $('[data-component="chat-item"]');
-        var $chatArea = $('.chat-area');
-
-         // Initially load messages with just the original content
-         messages.forEach(function (msg) {
-          var $newChatItem = $chatTemplate.clone();
-          $newChatItem.find('.name').text(msg.Name);
-          $newChatItem.find('.chat-balloon').html(msg.Message); // Only load original message initially
-          $newChatItem.find('.chat-thumb').attr('src','img/' + msg.Ppic + ".jpg");
-          $newChatItem.removeClass('d-none');
-          $chatArea.append($newChatItem);
-        });
-
-        // Event listener for the translation button
-        $('trans-btn').on('click', function() {
-          // Toggle between original and translated message
-          isTranslationVisible = !isTranslationVisible;
-
-          // Clear current chat items and re-load them with the toggled content
-          $chatArea.empty();
-
-          messages.forEach(function (msg) {
-            var $newChatItem = $chatTemplate.clone();
-            $newChatItem.find('.name').text(msg.Name);
-            // Toggle the content based on translation visibility
-            if (isTranslationVisible && msg.Message1) {
-              $newChatItem.find('.chat-balloon').html(msg.Message + "<hr>" + msg.Message1); // Show both messages
-            } else {
-              $newChatItem.find('.chat-balloon').html(msg.Message); // Only show original message
-            }
-            $newChatItem.find('.chat-thumb').attr('src','img/' + msg.Ppic + ".jpg");
-            $newChatItem.removeClass('d-none');
-            $chatArea.append($newChatItem);
-        });
-
-      });
-    });
-  });
-  </script> -->
+  
 
   <script>
     $(function () {
@@ -126,6 +74,19 @@
         var $transButton = document.getElementById('trans-btn');
   
         let showTranslation = false; // Toggle flag
+
+        // Helper: Calculate days from today
+        function daysSince(dateString) {
+          if (!dateString) return null;
+
+          const today = new Date();
+          const pastDate = new Date(dateString);
+
+          if (isNaN(pastDate)) return null;
+
+          const diffTime = today - pastDate;
+          return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        }
   
         // Function to render messages
         function renderMessages() {
@@ -133,6 +94,7 @@
 
             messages.forEach(function (msg) {
               var $newChatItem = $chatTemplate.clone();
+              //console.log($newChatItem.html());
               $newChatItem.find('.name').text(msg.Name);
 
               let messageHTML = msg.Message;
@@ -144,10 +106,22 @@
 
               $newChatItem.find('.chat-balloon').html(messageHTML);
               $newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".jpg");
+
+              
+              // Heart color
+             // $newChatItem.find('.heart').html('<p style="color:' + msg.Heart + '">❤︎');
+              // Days since date
+              const dayCount = daysSince(msg.Date);
+               // if (dayCount !== null) {
+                  $newChatItem.find('.heart').html(`<p style="color: ${msg.Heart} "> ❤︎ <span style ="color:#000"> +${dayCount} </span>`);
+                //} else {
+                 // $newChatItem.find('.dayss').text(msg.Date || 'dasd');
+                //}
+
               $newChatItem.removeClass('d-none');
               $chatArea.append($newChatItem);
-            });
-          }
+          });
+       }
   
         // Initial render (original messages)
         renderMessages();
