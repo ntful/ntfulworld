@@ -189,11 +189,12 @@ hr {
 }
 
 .heart p{
-  align-items: center;
   justify-self: center;
+  font-size: 11px;
 }
 
 .xxx{
   align-items: center;
   justify-self: center;
+  font-size:12px;
 }

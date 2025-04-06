@@ -106,17 +106,18 @@
 
               $newChatItem.find('.chat-balloon').html(messageHTML);
               $newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".jpg");
+              $newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".JPG");
 
               
               // Heart color
              // $newChatItem.find('.heart').html('<p style="color:' + msg.Heart + '">❤︎');
               // Days since date
               const dayCount = daysSince(msg.Date);
-               // if (dayCount !== null) {
-                  $newChatItem.find('.heart').html(`<p style="color: ${msg.Heart} "> ❤︎ <span style ="color:#000"> +${dayCount} </span>`);
-                //} else {
-                 // $newChatItem.find('.dayss').text(msg.Date || 'dasd');
-                //}
+               if (dayCount !== null) {
+                  $newChatItem.find('.heart').html(`<p style="color: ${msg.Heart} ">❤︎ <span style ="color:#000">+${dayCount}</span>`);
+                } else {
+                 $newChatItem.find('.heart').html(`<p style="color: ${msg.Heart} "> ❤︎`);
+                }
 
               $newChatItem.removeClass('d-none');
               $chatArea.append($newChatItem);
