@@ -78,6 +78,7 @@
         var $transButton = document.getElementById('trans-btn');
   
         let showTranslation = false; // Toggle flag
+        let TransButton = false;
 
         // Helper: Calculate days from today
         function daysSince(dateString) {
@@ -106,10 +107,10 @@
             }
   
         // Function to render messages
-        function renderMessages() {
+            function renderMessages() {
             $chatArea.empty();
 
-            messages.forEach(function (msg) {
+              messages.forEach(function (msg) {
               var $newChatItem = $chatTemplate.clone();
 
               //console.log($newChatItem.html());
@@ -121,9 +122,8 @@
               if (showTranslation && msg.Message1) {
                 messageHTML += "<hr> <span style='color:#9259ba'>" + msg.Message1 + "</span>";
               }
+            
               $newChatItem.find('.chat-balloon').html(messageHTML);
-              //$newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".JPG");
-              //$newChatItem.find('.chat-thumb').attr('src', 'img/' + msg.Ppic + ".jpg");
 
               // Set image source based on file existence (jpg or JPG)
               var imagePath = 'img/' + msg.Ppic + ".jpg"; // Default to .jpg
@@ -162,8 +162,16 @@
         renderMessages();
   
         // Toggle on button click
-        $transButton.addEventListener('click', () => {
+          $transButton.addEventListener('click', () => {
           showTranslation = !showTranslation;
+
+          const transIcon = document.getElementById("trans");
+          if (showTranslation) {
+            transIcon.style.fill = "#9259ba";
+          } else {
+            transIcon.style.fill = "";
+          }
+
           renderMessages();
         });
       });
