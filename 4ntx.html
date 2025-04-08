@@ -81,11 +81,17 @@
             
              <div class="loading-text">
                 Loading<span class="dot-animation">
-                  <span>.</span><span>.</span><span>.</span>
+              <span>.</span><span>.</span><span>.</span>
                 </span>
               </div>
     </div>
    <script>
+
+        window.onpageshow = function(event) {
+          if (event.persisted) {
+            window.location.reload();
+          }
+        };
         // Wait for 4 seconds and then redirect to map.html
         setTimeout(function() {
             window.location.href = "map.html";
