@@ -20,6 +20,7 @@
      justify-content: center;
       z-index: -1;
       height: 100vh;
+      padding-bottom: 100px !important;
    }
 
    svg {
@@ -1206,8 +1207,6 @@
             if (countrySVG) {
    
               countrySVG.style.fill = color;
-              countrySVG.style.stroke = '#fff';
-               countrySVG.style.strokeWidth = '1px';
               countrySVG.style.cursor = 'pointer';
               countrySVG.addEventListener("click", function (e) {
                 showPopup(countryId, e.pageX, e.pageY);
@@ -1275,6 +1274,12 @@
      $('#popup-close').on('click', function () {
        $('#popup,#popup-overlay').hide();
      });
+
+      // You can also make clicking outside close it:
+      $('#popup-overlay').on('click', function () {
+        $('#popup, #popup-overlay').hide();
+      });
+
    });
  </script>
 
