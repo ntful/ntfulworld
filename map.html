@@ -1093,105 +1093,99 @@
         </div>
     </div>
 
-
-
     <script>
-
       $(function () {
-         $.getJSON('msgs.json', function (json) {
-            var totalMessages = json.length;
-            var data = {};
-
-            // Group messages by CountryId
-            json.forEach(function (item) {
-               data[item.CountryId] = data[item.CountryId] || [];
-               data[item.CountryId].push(item);
-            });
-      
-            // Apply color based on percentage
-            Object.keys(data).forEach(function (countryId) {
-               //console.log('Processing CountryId:', countryId);
-      
-               var messageList = data[countryId];
-               var percentage = (messageList.length / totalMessages) * 100;
-               var color = getColorForPercentage(percentage);
-      
-               // Select SVG element by ID and apply fill
-               var countrySVG = document.querySelector(`#${countryId}`);
-               if (countrySVG) {
-               countrySVG.style.fill = color;
-               countrySVG.style.cursor = 'pointer';
-
-               // Hover: Show popup
-               countrySVG.addEventListener('mousemove', (e) => {
-               popup.style.left = `${e.pageX + 10}px`;
-               popup.style.top = `${e.pageY + 10}px`;
-               popup.innerText = `${messageList.length} messages - NTFULs found`;
-               popup.style.display = 'block';
-               });
-
-               // Leave: Hide popup
-               countrySVG.addEventListener('mouseleave', () => {
-               popup.style.display = 'none';
-               });
-
-               // Click: Go to letter page
-               countrySVG.addEventListener('click', () => {
-               const letterParams = new URLSearchParams({ c: countryId });
-               window.location.href = `letter.html?${letterParams.toString()}`;
-               });
-
-
-               } else {
-               console.warn('No SVG element with ID:', countryId);
-               }
-
-            });
-         });
-         });
-
-
-
- 
-
-               function getColorForPercentage(percentage) {
-            // Clamp percentage between 0 and 100
-            const clamped = Math.min(Math.max(percentage, 0), 100);
-
-            // Light earth green: #d4eac7 (RGB: 212, 234, 199)
-            // Dark green:        #1e5631 (RGB: 30, 86, 49)
-
-            const light = { r: 212, g: 234, b: 199 };
-            const dark  = { r: 30,  g: 86,  b: 49 };
-
-            // Calculate color by linear interpolation
-            const r = Math.round(light.r + (dark.r - light.r) * (clamped / 100));
-            const g = Math.round(light.g + (dark.g - light.g) * (clamped / 100));
-            const b = Math.round(light.b + (dark.b - light.b) * (clamped / 100));
-
-            return `rgb(${r}, ${g}, ${b})`;
+        $.getJSON('msgs.json', function (json) {
+          const totalMessages = json.length;
+          const data = {};
+    
+          // Group messages by CountryId
+          json.forEach(function (item) {
+            data[item.CountryId] = data[item.CountryId] || [];
+            data[item.CountryId].push(item);
+          });
+    
+          // Loop through each country group
+          Object.keys(data).forEach(function (countryId) {
+            const messageList = data[countryId];
+            const percentage = (messageList.length / totalMessages) * 100;
+            const color = getColorForPercentage(percentage);
+    
+            // Color and click interaction
+            const countrySVG = document.querySelector(`#${countryId}`);
+            if (countrySVG) {
+              countrySVG.style.fill = color;
+              countrySVG.style.cursor = 'pointer';
+              countrySVG.addEventListener("click", function (e) {
+                showPopup(countryId, e.pageX, e.pageY);
+              });
+            } else {
+              console.warn('No SVG element with ID:', countryId);
             }
-
-            document.addEventListener("DOMContentLoaded", function() {
-               // Optional: If you want to add zooming functionality or interaction
-               const mapContainer = document.getElementById('map-container');
-               
-               // Logic to adjust the viewBox if needed (like zoom or pan)
-               // Example of adjusting for a dynamic viewBox
+          });
+    
+          // Show popup function
+          function showPopup(countryId, x, y) {
+            const messages = data[countryId];
+            if (!messages) return;
+    
+            $('#popup-title').text(`${countryId} – ${messages.length} NTFULS`);
+            const $content = $('#popup-content');
+            $content.empty();
+    
+            messages.forEach(function (msg) {
+              const imageUrl = `img/${msg.Ppic}.jpg`;
+              const fallbackUrl = `img/${msg.Ppic}.JPG`;
+    
+              const $entry = $(`
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <img src="${imageUrl}" onerror="this.onerror=null;this.src='${fallbackUrl}'" style="width: 40px; height: 40px; border-radius: 50%;">
+                  <span>${msg.Name}</span>
+                </div>
+              `);
+    
+              $content.append($entry);
             });
-
+    
+            const $popup = $('#popup');
+            $popup.css({ left: x + 'px', top: y + 'px', display: 'block' });
+          }
+        });
+      });
+    
+      function getColorForPercentage(percentage) {
+        const clamped = Math.min(Math.max(percentage, 0), 100);
+        const light = { r: 212, g: 234, b: 199 };
+        const dark = { r: 30, g: 86, b: 49 };
+    
+        const r = Math.round(light.r + (dark.r - light.r) * (clamped / 100));
+        const g = Math.round(light.g + (dark.g - light.g) * (clamped / 100));
+        const b = Math.round(light.b + (dark.b - light.b) * (clamped / 100));
+    
+        return `rgb(${r}, ${g}, ${b})`;
+      }
     </script>
 
-<div id="map-popup" style="
-position: absolute;
-background: white;
-padding: 8px 12px;
-border-radius: 8px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-font-size: 14px;
-pointer-events: none;
-display: none;
-z-index: 20;
-"></div>
+
+
+<div id="popup" style="
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+">
+  <h5 id="popup-title"></h5>
+  <div id="popup-content" style="display: flex; flex-direction: column; gap: 10px;"></div>
+  <button onclick="document.getElementById('popup').style.display='none'" class="btn btn-sm btn-outline-secondary mt-2">Close</button>
+</div>
+
 </body>
 </html>
