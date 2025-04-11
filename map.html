@@ -18,6 +18,9 @@
      position: auto;
      overflow: auto;
      padding: 50px;
+     align-items: center;
+     justify-content: center;
+      z-index: -1;
    }
 
    svg {
@@ -27,6 +30,9 @@
       user-select: none;
       overflow: hidden;
    }
+   svg path:hover {
+      opacity: 0.85;
+}
  </style>
 </head>
 </head>
@@ -1088,13 +1094,14 @@
     </div>
 
 
+
     <script>
 
       $(function () {
          $.getJSON('msgs.json', function (json) {
             var totalMessages = json.length;
             var data = {};
-      
+
             // Group messages by CountryId
             json.forEach(function (item) {
                data[item.CountryId] = data[item.CountryId] || [];
@@ -1113,12 +1120,38 @@
                var countrySVG = document.querySelector(`#${countryId}`);
                if (countrySVG) {
                countrySVG.style.fill = color;
+               countrySVG.style.cursor = 'pointer';
+
+               // Hover: Show popup
+               countrySVG.addEventListener('mousemove', (e) => {
+               popup.style.left = `${e.pageX + 10}px`;
+               popup.style.top = `${e.pageY + 10}px`;
+               popup.innerText = `${messageList.length} messages - NTFULs found`;
+               popup.style.display = 'block';
+               });
+
+               // Leave: Hide popup
+               countrySVG.addEventListener('mouseleave', () => {
+               popup.style.display = 'none';
+               });
+
+               // Click: Go to letter page
+               countrySVG.addEventListener('click', () => {
+               const letterParams = new URLSearchParams({ c: countryId });
+               window.location.href = `letter.html?${letterParams.toString()}`;
+               });
+
+
                } else {
                console.warn('No SVG element with ID:', countryId);
                }
+
             });
          });
          });
+
+
+
  
 
                function getColorForPercentage(percentage) {
@@ -1148,5 +1181,17 @@
             });
 
     </script>
+
+<div id="map-popup" style="
+position: absolute;
+background: white;
+padding: 8px 12px;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+font-size: 14px;
+pointer-events: none;
+display: none;
+z-index: 20;
+"></div>
 </body>
 </html>
