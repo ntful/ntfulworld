@@ -15,13 +15,12 @@
   <style>
    .map-container {
      overflow: auto;
-     padding: 50px;
+     padding: 30px;
      align-items: center;
      justify-content: center;
       z-index: -1;
-      height:100%;
-      flex-wrap: wrap;
-      width: 100%;
+      height: 100%;
+      margin-bottom:200px;
    }
 
    svg {
@@ -30,7 +29,6 @@
       height: 90vh;
       width:auto;
       display: block;
-      user-select: none;
       overflow: hidden;
       
    }
@@ -1286,7 +1284,7 @@
    const mapContainer = document.querySelector('.map-container');
    if (mapContainer) {
      mapContainer.scrollTo({
-       left: 1000, // horizontal scroll
+       left: 300, // horizontal scroll
        behavior: 'smooth'
      });
    }
