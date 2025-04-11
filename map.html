@@ -20,43 +20,15 @@
          justify-content: center;  /* center horizontally */
          align-items: center;  
          overflow: auto;
-         }
-
-         .chat-bubble {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            fill: #fff;
-            background-color: #3b82f6;
-            padding: 8px;
-            border-radius: 12px;
-            pointer-events: none;
-            text-anchor: middle;
-            stroke: #1d4ed8;
-            stroke-width: 2px;
-         }
-
-         .chat-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid #3b82f6;
+         z-index: -1;
          }
     </style>
  
 </head>
    <body>
-      <div style="overflow:auto; padding-bottom:60px">
+      <div>
       <div class = "map-container">
 
-         <path id="country1" d="M10 10 L50 10 L50 50 L10 50 Z" fill="lightgray" />
-         <path id="country2" d="M100 100 L150 100 L150 150 L100 150 Z" fill="lightgray" />
-   
          <svg
           id="map-svg"
           style="fill:#e2e2e2"
@@ -1113,43 +1085,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const svg = document.querySelector('#map-svg');
-        
-        // Define a message for the chat bubble
-        const messages = {
-          'country1': "Hello, Country 1!",
-          'country2': "Welcome to Country 2!"
-        };
-  
-        // Function to create and position a chat bubble
-        function createChatBubble(countryId, message) {
-          const country = document.querySelector(`#${countryId}`);
-          
-          if (country) {
-            // Get the bounding box of the country path
-            const bbox = country.getBBox();
-            
-            // Create a chat bubble
-            const chatBubble = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            chatBubble.setAttribute("x", bbox.x + bbox.width / 2);
-            chatBubble.setAttribute("y", bbox.y + bbox.height / 2 - 10);  // Slightly adjust for better placement
-            chatBubble.setAttribute("class", "chat-bubble");
-            chatBubble.textContent = message;
-  
-            // Append the bubble to the SVG
-            svg.appendChild(chatBubble);
-          }
-        }
-  
-        // Create chat bubbles for each country
-        Object.keys(messages).forEach(countryId => {
-          createChatBubble(countryId, messages[countryId]);
-        });
-      });
-    </script>
 
 
     <script>
