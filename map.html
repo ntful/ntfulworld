@@ -8,133 +8,56 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.mapsvg.com/mapsvg.css">
+   <script src="https://cdn.mapsvg.com/mapsvg.min.js"></script>
   
-
-  <script>
-   $(function () {
-     $.getJSON('msgs.json', function (json) {
-       var totalMessages = json.length;
-       var data = {};
- 
-       // Group messages by CountryId
-       json.forEach(function (item) {
-         data[item.CountryId] = data[item.CountryId] || [];
-         data[item.CountryId].push(item);
-       });
- 
-       // Apply color based on percentage
-       Object.keys(data).forEach(function (countryId) {
-         //console.log('Processing CountryId:', countryId);
- 
-         var messageList = data[countryId];
-         var percentage = (messageList.length / totalMessages) * 100;
-         var color = getColorForPercentage(percentage);
- 
-         // Select SVG element by ID and apply fill
-         var countrySVG = document.querySelector(`#${countryId}`);
-         if (countrySVG) {
-           countrySVG.style.fill = color;
-         } else {
-           console.warn('No SVG element with ID:', countryId);
+   <style>
+    
+      .map-container {
+         width: 100vw;
+         height: 100vh;
+         display:flex;
+         justify-content: center;  /* center horizontally */
+         align-items: center;  
+         overflow: auto;
          }
-       });
-     });
-   });
- 
-   //Convert percentage to red-to-green color
-   /*function getColorForPercentage(percentage) {
-      var clamped = Math.min(Math.max(percentage, 10), 100);
-      var opacity = clamped / 90; // 0.0 to 1.0
-      return `rgba(79, 0, 178, ${opacity})`; // Purple color with variable opacity
-   }*/
 
-   function getColorForPercentage(percentage) {
-  // Clamp percentage between 0 and 100
-  const clamped = Math.min(Math.max(percentage, 0), 100);
+         .chat-bubble {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            fill: #fff;
+            background-color: #3b82f6;
+            padding: 8px;
+            border-radius: 12px;
+            pointer-events: none;
+            text-anchor: middle;
+            stroke: #1d4ed8;
+            stroke-width: 2px;
+         }
 
-  // Light earth green: #d4eac7 (RGB: 212, 234, 199)
-  // Dark green:        #1e5631 (RGB: 30, 86, 49)
-
-  const light = { r: 212, g: 234, b: 199 };
-  const dark  = { r: 30,  g: 86,  b: 49 };
-
-  // Calculate color by linear interpolation
-  const r = Math.round(light.r + (dark.r - light.r) * (clamped / 100));
-  const g = Math.round(light.g + (dark.g - light.g) * (clamped / 100));
-  const b = Math.round(light.b + (dark.b - light.b) * (clamped / 100));
-
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
-
-const svg = document.getElementById('map-svg');
-  let scale = 1;
-  let translateX = 0;
-  let translateY = 0;
-  let isDragging = false;
-  let startX, startY;
-
-  function updateTransform() {
-    svg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-  }
-
-  document.getElementById('map-container').addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const delta = e.deltaY > 0 ? 0.9 : 1.1;
-    scale *= delta;
-    scale = Math.max(0.4, Math.min(6, scale));
-    updateTransform();
-  });
-
-  svg.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startX = e.clientX - translateX;
-    startY = e.clientY - translateY;
-    svg.style.cursor = 'grabbing';
-  });
-
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-    svg.style.cursor = 'grab';
-  });
-
-  window.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      translateX = e.clientX - startX;
-      translateY = e.clientY - startY;
-      updateTransform();
-    }
-  });
-
- </script>
- <style>
-   html, body {
-     height: 100%;
-     margin: 0;
-     overflow: hidden;
-   }
- 
-   .map-container {
-     width: 100vw;
-     height: 100vh;
-     overflow: hidden;
-     position: relative;
-     background-color: #f9f9f9;
-     cursor: grab;
-   }
- 
-   svg {
-     width: 100%;
-     height: 100%;
-     transform-origin: 0 0;
-     user-select: none;
-   }
- </style>
+         .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #3b82f6;
+         }
+    </style>
  
 </head>
    <body>
-      <div class="map-container" id="map-container">
-        <svg
+      <div style="overflow:auto; padding-bottom:60px">
+      <div class = "map-container">
+
+         <path id="country1" d="M10 10 L50 10 L50 50 L10 50 Z" fill="lightgray" />
+         <path id="country2" d="M100 100 L150 100 L150 150 L100 150 Z" fill="lightgray" />
+   
+         <svg
           id="map-svg"
           style="fill:#e2e2e2"
           xmlns:mapsvg="http://mapsvg.com"
@@ -146,6 +69,7 @@ const svg = document.getElementById('map-svg');
           width="1009.6727"
           height="665.96301"
           viewBox="0 0 1009.6727 665.96301"
+          preserveAspectRatio="xMidYMid meet"
  	>
   <path
      d="m 479.68275,331.6274 -0.077,0.025 -0.258,0.155 -0.147,0.054 -0.134,0.027 -0.105,-0.011 -0.058,-0.091 0.006,-0.139 -0.024,-0.124 -0.02,-0.067 0.038,-0.181 0.086,-0.097 0.119,-0.08 0.188,0.029 0.398,0.116 0.083,0.109 10e-4,0.072 -0.073,0.119 z"
@@ -1172,12 +1096,8 @@ const svg = document.getElementById('map-svg');
      title="Zimbabwe"
      id="ZW" />
     </svg>
-
-
-
-
    </div>
-
+   </div>
 
 
     <!-- HERE LIES THE BOTTOM BUTTON FOREVER -->
@@ -1193,5 +1113,106 @@ const svg = document.getElementById('map-svg');
             </div>
         </div>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const svg = document.querySelector('#map-svg');
+        
+        // Define a message for the chat bubble
+        const messages = {
+          'country1': "Hello, Country 1!",
+          'country2': "Welcome to Country 2!"
+        };
+  
+        // Function to create and position a chat bubble
+        function createChatBubble(countryId, message) {
+          const country = document.querySelector(`#${countryId}`);
+          
+          if (country) {
+            // Get the bounding box of the country path
+            const bbox = country.getBBox();
+            
+            // Create a chat bubble
+            const chatBubble = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            chatBubble.setAttribute("x", bbox.x + bbox.width / 2);
+            chatBubble.setAttribute("y", bbox.y + bbox.height / 2 - 10);  // Slightly adjust for better placement
+            chatBubble.setAttribute("class", "chat-bubble");
+            chatBubble.textContent = message;
+  
+            // Append the bubble to the SVG
+            svg.appendChild(chatBubble);
+          }
+        }
+  
+        // Create chat bubbles for each country
+        Object.keys(messages).forEach(countryId => {
+          createChatBubble(countryId, messages[countryId]);
+        });
+      });
+    </script>
+
+
+    <script>
+
+      $(function () {
+         $.getJSON('msgs.json', function (json) {
+            var totalMessages = json.length;
+            var data = {};
+      
+            // Group messages by CountryId
+            json.forEach(function (item) {
+               data[item.CountryId] = data[item.CountryId] || [];
+               data[item.CountryId].push(item);
+            });
+      
+            // Apply color based on percentage
+            Object.keys(data).forEach(function (countryId) {
+               //console.log('Processing CountryId:', countryId);
+      
+               var messageList = data[countryId];
+               var percentage = (messageList.length / totalMessages) * 100;
+               var color = getColorForPercentage(percentage);
+      
+               // Select SVG element by ID and apply fill
+               var countrySVG = document.querySelector(`#${countryId}`);
+               if (countrySVG) {
+               countrySVG.style.fill = color;
+               } else {
+               console.warn('No SVG element with ID:', countryId);
+               }
+            });
+         });
+         });
+ 
+
+               function getColorForPercentage(percentage) {
+            // Clamp percentage between 0 and 100
+            const clamped = Math.min(Math.max(percentage, 0), 100);
+
+            // Light earth green: #d4eac7 (RGB: 212, 234, 199)
+            // Dark green:        #1e5631 (RGB: 30, 86, 49)
+
+            const light = { r: 212, g: 234, b: 199 };
+            const dark  = { r: 30,  g: 86,  b: 49 };
+
+            // Calculate color by linear interpolation
+            const r = Math.round(light.r + (dark.r - light.r) * (clamped / 100));
+            const g = Math.round(light.g + (dark.g - light.g) * (clamped / 100));
+            const b = Math.round(light.b + (dark.b - light.b) * (clamped / 100));
+
+            return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+               // Optional: If you want to add zooming functionality or interaction
+               const mapContainer = document.getElementById('map-container');
+               
+               // Logic to adjust the viewBox if needed (like zoom or pan)
+               // Example of adjusting for a dynamic viewBox
+            });
+
+    </script>
+
+
 </body>
 </html>
