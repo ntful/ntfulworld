@@ -34,7 +34,10 @@
       opacity: 0.85;
    }
    #popup {
-   position: absolute;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%); /* centers it */
    display: none;
    z-index: 999;
    }
@@ -103,6 +106,17 @@
   flex-direction: column;
   gap: 10px;
   min-height: 0;
+}
+
+#popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 998;
+  display: none;
 }
 
 
@@ -1199,6 +1213,7 @@
     
           // Show popup function
           function showPopup(countryId, x, y) {
+            $('#popup, #popup-overlay').show(); // to open
             const messages = data[countryId];
             if (!messages) return;
     
@@ -1219,9 +1234,7 @@
     
               $content.append($entry);
             });
-    
-            const $popup = $('#popup');
-            $popup.css({ left: x + 'px', top: y + 'px', display: 'block' });
+
           }
         });
       });
@@ -1239,6 +1252,7 @@
       }
     </script>
 
+<div id="popup-overlay"></div>
 <div id="popup">
    <button id="popup-close">&times;</button>
    <div id="popup-box">
@@ -1252,7 +1266,7 @@
  <script>
    $(document).ready(function () {
      $('#popup-close').on('click', function () {
-       $('#popup').hide();
+       $('#popup,#popup-overlay').hide();
      });
    });
  </script>
