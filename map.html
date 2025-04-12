@@ -13,20 +13,26 @@
   <script src="https://cdn.mapsvg.com/mapsvg.min.js"></script>
 
   <style>
-
+   html, body{
+      background-color:#186586;
+   }
    svg #SG{
      
       stroke: rgb(159, 196, 155);
-  stroke-width: 2px;
+      stroke-width: 2px;
+   }
+   .map-outer{
+      height: 100svh;
    }
    .map-container {
      overflow: auto;
-     padding: 50px;
+     padding: 60px;
      align-items: center;
      justify-content: center;
       z-index: -1;
       height: 100svh;
       padding-bottom:14px;
+     min-height: 100svh;
    }
 
    svg {
@@ -36,6 +42,7 @@
       width:auto;
       display: block;
       overflow: hidden;
+      filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.4));
       
    }
    svg path:hover {
@@ -69,7 +76,7 @@
   top: -8px;
   right: -8px;
   background-color: #9259ba;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 50%;
   width: 26px;
@@ -133,11 +140,11 @@
 </head>
 
 <body>
-   <div>
+   <div class = "map-outer">
   <div class="map-container">
     <svg
       id="map-svg"
-      style="fill:#e2e2e2"
+      style="fill:#a6845e"
       xmlns:mapsvg="http://mapsvg.com"
       xmlns:dc="http://purl.org/dc/elements/1.1/"
       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -1208,12 +1215,12 @@
           Object.keys(data).forEach(function (countryId) {
             const messageList = data[countryId];
             const percentage = (messageList.length / totalMessages) * 100;
-            const color = getColorForPercentage(percentage);
+            //const color = getColorForPercentage(percentage);
+            const color = getCountryColor(countryId);
     
             // Color and click interaction
             const countrySVG = document.querySelector(`#${countryId}`);
             if (countrySVG) {
-   
               countrySVG.style.fill = color;
               countrySVG.style.cursor = 'pointer';
               countrySVG.addEventListener("click", function (e) {
@@ -1252,17 +1259,41 @@
         });
       });
     
-      function getColorForPercentage(percentage) {
+     /* function getColorForPercentage(percentage) {
         const clamped = Math.min(Math.max(percentage, 0), 100);
         const light = { r: 212, g: 234, b: 199 };
         const dark = { r: 30, g: 86, b: 49 };
     
-        const r = Math.round(light.r + (dark.r - light.r) * (clamped / 50));
-        const g = Math.round(light.g + (dark.g - light.g) * (clamped / 50));
-        const b = Math.round(light.b + (dark.b - light.b) * (clamped / 50));
+        const r = Math.round(light.r + (dark.r - light.r) * (clamped / 100));
+        const g = Math.round(light.g + (dark.g - light.g) * (clamped / 100));
+        const b = Math.round(light.b + (dark.b - light.b) * (clamped / 100));
     
         return `rgb(${r}, ${g}, ${b})`;
-      }
+      }*/
+
+      const earthyGreens = [
+  '#aacbaa', // very light sage
+  '#cfe7c9', // soft mint
+  '#b5d6aa', // sage green
+  '#9cc693', // olive mist
+  '#7eae75', // soft olive
+  '#669966', // classic mid green
+  '#4f774e', // deep moss
+  '#355e3b', // forest green
+];
+
+const countryColors = {};
+
+function getCountryColor(countryId) {
+  if (!countryColors[countryId]) {
+    const index = Math.floor(Math.random() * earthyGreens.length);
+    countryColors[countryId] = earthyGreens[index];
+  }
+  return countryColors[countryId];
+}
+
+
+
 
     </script>
 
