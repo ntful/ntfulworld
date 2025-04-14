@@ -159,6 +159,94 @@
    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
    }
 
+   #popup1 {
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%); /* centers it */
+   display: none;
+   z-index: 999;
+   }
+
+   #popup-box1 {
+      position: relative;
+      background-color: #fff;
+      border: 2px solid #9259ba;
+      border-radius: 16px;
+      width: 300px;
+      max-height: 300px;          /* ✅ caps height */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      font-family: 'Nanum Gothic', sans-serif;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; 
+      font-size: 0.9em;
+      padding:5px;
+      }
+
+   #popup-close1 {
+   position: absolute;
+   top: -8px;
+   right: -8px;
+   background-color: #9259ba;
+   color: #fff;
+   border: none;
+   border-radius: 50%;
+   width: 26px;
+   height: 26px;
+   font-size: 18px;
+   line-height: 28px;
+   text-align: center;
+   cursor: pointer;
+   padding: 0;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+   z-index: 1000;
+   }
+
+   #popup-close1:hover {
+   background-color: #6e4195;
+   }
+
+   #popup-header1 {
+   position: sticky;
+   top: 0;
+   padding:10px;
+   background-color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1;
+   border-bottom: 1px solid #e0e0e0;
+   }
+
+   #popup-title1 {
+   font-weight: bold;
+   font-size:1em;
+   color: #333;
+   margin: 0;
+   }
+
+   #popup-content1 {
+   overflow-y: auto;
+   padding: 12px 16px 16px;
+   flex-grow: 1;             /* ✅ this makes it take remaining space */
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   min-height: 0;
+   }
+
+   #popup-overlay1 {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0,0,0,0.5);
+   z-index: 998;
+   display: none;
+   }
+
 
 
  </style>
@@ -1382,6 +1470,61 @@ function getCountryColor(countryId) {
    }
  });
  </script>
+
+<svg id="top-left-icon" style="position: fixed; top: 10px; left: 10px; z-index: 1000;" width="40" height="40">
+   <image href="message.gif" width="40" height="40" style="cursor:pointer;" />
+ </svg>
+
+
+<!-- Popup Structure -->
+<div id="popup-overlay1"></div>
+<div id="popup1">
+   <button id="popup-close1">&times;</button>
+  <div id="popup-box1">
+    
+    <div id="popup-header1">
+      <span id="popup-title1">4주년을 축하합니다! 🎉 </span>
+    </div>
+    <div id="popup-content1">
+      <p id="popup-message1"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+   let totalMessages = 0;
+   let uniqueCountries = new Set();
+ 
+   // Load the data first
+   $.getJSON('msgs.json', function (json) {
+     totalMessages = json.length;
+     json.forEach(item => uniqueCountries.add(item.CountryId));
+   });
+ 
+   // Handle icon click
+   document.querySelector('#top-left-icon').addEventListener('click', () => {
+     const message = `NTX 안녕하세요~<br>4년 동안 총 <strong>${uniqueCountries.size}</strong>개국의 마음을 열어주셔서 진심으로 감사드립니다!
+아직 닿지 못한 곳들도 있지만,
+<strong>${totalMessages}</strong>명의 NTFUL 여러분께서 따뜻한 메시지를 남겨주셔서 더욱 뜻깊습니다~!<br>
+함께해 주셔서 정말 감사드려요, 앞으로도 계속 이어가길 바랍니다~`;
+ 
+     document.getElementById('popup-message1').innerHTML = message;
+     document.getElementById('popup1').style.display = 'flex';
+     document.getElementById('popup-overlay1').style.display = 'block';
+   });
+ 
+   // Close button and overlay click
+   document.getElementById('popup-close1').addEventListener('click', () => {
+     document.getElementById('popup1').style.display = 'none';
+     document.getElementById('popup-overlay1').style.display = 'none';
+   });
+ 
+   document.getElementById('popup-overlay1').addEventListener('click', () => {
+     document.getElementById('popup1').style.display = 'none';
+     document.getElementById('popup-overlay1').style.display = 'none';
+   });
+ </script>
+ 
 
 </body>
 </html>
