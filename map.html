@@ -36,7 +36,33 @@
 
    svg path:hover {
       opacity: 0.85;
+      z-index: 1;
    }
+
+   svg #SG{
+      stroke-width: 2px;
+      stroke: rgb(88, 174, 143);
+   }
+
+   .random-wave {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 10s ease-in-out;
+  }
+   .waves-layer {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 0; /* behind the map */
+   pointer-events: none;
+   }
+
    #popup {
    position: fixed;
    top: 50%;
@@ -46,101 +72,101 @@
    z-index: 999;
    }
 
-#popup-box {
-   position: relative;
-   background-color: #fff;
-   border: 2px solid #9259ba;
-   border-radius: 16px;
-   width: 280px;
-   max-height: 300px;          /* ✅ caps height */
-   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-   font-family: 'Nanum Gothic', sans-serif;
-   display: flex;
-   flex-direction: column;
-   overflow: hidden;  
+   #popup-box {
+      position: relative;
+      background-color: #fff;
+      border: 2px solid #9259ba;
+      border-radius: 16px;
+      width: 280px;
+      max-height: 300px;          /* ✅ caps height */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      font-family: 'Nanum Gothic', sans-serif;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;  
+      }
+
+   #popup-close {
+   position: absolute;
+   top: -8px;
+   right: -8px;
+   background-color: #9259ba;
+   color: #fff;
+   border: none;
+   border-radius: 50%;
+   width: 26px;
+   height: 26px;
+   font-size: 18px;
+   line-height: 28px;
+   text-align: center;
+   cursor: pointer;
+   padding: 0;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+   z-index: 1000;
    }
 
-#popup-close {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: #9259ba;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  font-size: 18px;
-  line-height: 28px;
-  text-align: center;
-  cursor: pointer;
-  padding: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
+   #popup-close:hover {
+   background-color: #6e4195;
+   }
 
-#popup-close:hover {
-  background-color: #6e4195;
-}
+   #popup-header {
+   position: sticky;
+   top: 0;
+   padding:10px;
+   background-color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1;
+   border-bottom: 1px solid #e0e0e0;
+   }
 
-#popup-header {
-  position: sticky;
-  top: 0;
-  padding:10px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  border-bottom: 1px solid #e0e0e0;
-}
+   #popup-title {
+   font-weight: bold;
+   font-size: .8em;
+   color: #333;
+   margin: 0;
+   }
 
-#popup-title {
-  font-weight: bold;
-  font-size: 15px;
-  color: #333;
-  margin: 0;
-}
-
-#popup-content {
+   #popup-content {
    overflow-y: auto;
-  padding: 12px 16px 16px;
-  flex-grow: 1;             /* ✅ this makes it take remaining space */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 0;
-}
+   padding: 12px 16px 16px;
+   flex-grow: 1;             /* ✅ this makes it take remaining space */
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   min-height: 0;
+   }
 
-#popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 998;
-  display: none;
-}
-.zoom-controls {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 10;
-}
+   #popup-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0,0,0,0.5);
+   z-index: 998;
+   display: none;
+   }
+   .zoom-controls {
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   z-index: 10;
+   }
 
-.zoom-controls button {
-  font-size: 20px;
-  padding: 8px 12px;
-  background: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
+   .zoom-controls button {
+   font-size: 20px;
+   padding: 8px 12px;
+   background: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+   }
 
 
 
@@ -149,6 +175,7 @@
 </head>
 
 <body>
+   <div class="waves-layer"></div>
   <div class="map-container">
     <svg
       id="map-svg"
@@ -1209,6 +1236,21 @@
 
     <script>
 
+         const wavesContainer = document.querySelector('.waves-layer');
+         const wavesCount = 20; // how many gifs you want
+
+         for (let i = 0; i < wavesCount; i++) {
+            const img = document.createElement('img');
+            img.src = 'wave.gif'; // your gif
+            img.className = 'random-wave';
+
+            // Random position inside the container
+            img.style.top = `${Math.random() * 100}%`;
+            img.style.left = `${Math.random() * 100}%`;
+
+            wavesContainer.appendChild(img);
+         }
+
 
       $(function () {
         $.getJSON('msgs.json', function (json) {
@@ -1285,6 +1327,8 @@
       }*/
 
       const earthyGreens = [
+      '#2c946e',
+      '#1a703e',
       '#7dad85', // very light sage
       '#abc4a5', // soft mint
       '#b5d6aa', // sage green
