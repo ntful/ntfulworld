@@ -37,6 +37,8 @@
         const originalButton = document.getElementById('btn-og');
         const englishButton = document.getElementById('btn-eng');
         const koreanButton = document.getElementById('btn-kr');
+        const japaneseButton = document.getElementById('btn-ch');
+        const chineseButton = document.getElementById('btn-jp');
         
         // Get the lyrics container where the lyrics will be displayed
         const lyricsContainer = document.getElementById('lyrics');
@@ -65,6 +67,14 @@
 
         koreanButton.addEventListener('click', () => {
           displayLyrics(jsonData['kr-lyrics']); // Display the Korean lyrics
+        });
+
+        japaneseButton.addEventListener('click', () => {
+          displayLyrics(jsonData['jp-lyrics']); // Display the Korean lyrics
+        });
+
+        chineseButton.addEventListener('click', () => {
+          displayLyrics(jsonData['ch-lyrics']); // Display the Korean lyrics
         });
 
         // Optional: You can show the original lyrics by default
