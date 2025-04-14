@@ -1225,36 +1225,6 @@
     </div>
 
     <script>
-      const svg = document.querySelector('#map-svg');
-    
-      if (!svg) {
-        console.error("SVG with class .map-svg not found!");
-      }
-    
-      fetch('country.json')
-        .then(res => res.json())
-        .then(countryNames => {
-          for (const [id, name] of Object.entries(countryNames)) {
-            const country = document.getElementById(id);
-            if (!country) continue;
-    
-            const bbox = country.getBBox();
-            const x = bbox.x + bbox.width / 1.8;
-            const y = bbox.y + bbox.height / 1.9;
-    
-            const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            label.setAttribute('x', x);
-            label.setAttribute('y', y);
-            label.setAttribute('class', 'country-label');
-            label.textContent = name;
-    
-            svg.appendChild(label);
-          }
-        });
-    </script>
-    
-
-    <script>
 
       $(function () {
         $.getJSON('msgs.json', function (json) {
@@ -1282,6 +1252,26 @@
               countrySVG.addEventListener("click", function (e) {
                 showPopup(countryId, e.pageX, e.pageY);
               });
+
+              // Add message.gif above the country if it has messages
+              if (messageList.length > 0) {
+                    const bbox = countrySVG.getBBox();
+                    const x = bbox.x + bbox.width / 1.9;
+                    const y = bbox.y + bbox.height / 1.9;
+
+                    // Create an image element
+                    const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+                    img.setAttribute('href', 'message.gif'); // Path to your gif
+                    img.setAttribute('x', x - 10); // Adjust the position as needed
+                    img.setAttribute('y', y - 10); // Adjust the position as needed
+                    img.setAttribute('width', 10);  // Size of the image
+                    img.setAttribute('height', 10); // Size of the image
+
+                    // Append the image above the country
+                    document.querySelector('#map-svg').appendChild(img);
+                }
+
+
             } else {
               console.warn('No SVG element with ID:', countryId);
             }
