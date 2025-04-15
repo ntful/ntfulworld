@@ -1361,8 +1361,8 @@
               // Add message.gif above the country if it has messages
               if (messageList.length > 0) {
                     const bbox = countrySVG.getBBox();
-                    const x = bbox.x + bbox.width / 1.6;
-                    const y = bbox.y + bbox.height / 1.9;
+                    const x = bbox.x + bbox.width / 1.5;
+                    const y = bbox.y + bbox.height / 1.7;
 
                     // Create an image element
                     const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
@@ -1519,10 +1519,10 @@ function getCountryColor(countryId) {
  
    // Handle icon click
    document.querySelector('#top-left-icon').addEventListener('click', () => {
-     const message = `NTX 안녕하세요~<br>
+     const message = `NTX 안녕하세요~<br><br>
 4년 동안 전 세계 <strong>${uniqueCountries.size}</strong>개국의 NTFUL 분들의 마음을 열어주셔서 정말 감사해요!<br>
 그 25개국에는 총 <strong>${totalMessages}</strong>명의 NTFUL이 따뜻한 메시지를 남겨주셔서 더더욱 뜻깊었어요~<br>
-함께해 주셔서 정말 감사하고, 앞으로도 이 여정을 함께하면서 더 많은 나라의 마음을 열어가요~!`;
+함께해 주셔서 정말 감사하고, 앞으로도 이 여정을 함께하면서 더 많은 나라의 마음을 열어가요~!<br><br>자~ 이제 색깔 있는 나라를 클릭해서 NTFUL를 만나보자!`;
  
      document.getElementById('popup-message1').innerHTML = message;
      document.getElementById('popup1').style.display = 'flex';
